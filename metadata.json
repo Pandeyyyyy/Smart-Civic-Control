@@ -1,0 +1,6 @@
+{
+  "name": "Smart Civic Connect",
+  "description": "AI-Based Civic Complaint and Urban Service Management System with multimodal AI analysis, smart ward detection, department routing, and citizen resolution tracking.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
