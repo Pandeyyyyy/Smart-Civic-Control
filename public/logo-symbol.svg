@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Left leaf gradient (Deep Teal) -->
+    <linearGradient id="leafLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E7490" />
+      <stop offset="40%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#042F2E" />
+    </linearGradient>
+
+    <!-- Right leaf gradient (Emerald / Green) -->
+    <linearGradient id="leafRightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="50%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#065F46" />
+    </linearGradient>
+
+    <!-- Center skyscraper gradient -->
+    <linearGradient id="towerCenterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0891B2" />
+      <stop offset="35%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#115E59" />
+    </linearGradient>
+
+    <!-- Center skyscraper right face shadow -->
+    <linearGradient id="towerCenterRightFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D9488" />
+      <stop offset="100%" stop-color="#042F2E" />
+    </linearGradient>
+
+    <!-- Left skyscraper gradient -->
+    <linearGradient id="towerLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="60%" stop-color="#0891B2" />
+      <stop offset="100%" stop-color="#0E7490" />
+    </linearGradient>
+
+    <!-- Right skyscraper gradient -->
+    <linearGradient id="towerRightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="70%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+
+    <!-- Wifi signal gradient -->
+    <linearGradient id="signalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#34D399" />
+    </linearGradient>
+  </defs>
+
+  <!-- BUILDINGS GROUP (behind bottom curves) -->
+  <g id="buildings">
+    <!-- Left background building -->
+    <path d="M 152 230 L 176 210 L 176 310 L 152 300 Z" fill="#0284C7" opacity="0.85" />
+
+    <!-- Left main building -->
+    <path d="M 174 195 L 208 175 L 208 320 L 174 310 Z" fill="url(#towerLeftGrad)" />
+    <!-- Left building vertical window slits -->
+    <rect x="184" y="205" width="4" height="15" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+    <rect x="184" y="226" width="4" height="15" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+    <rect x="184" y="247" width="4" height="15" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+    <rect x="194" y="200" width="4" height="15" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+    <rect x="194" y="221" width="4" height="15" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+    <rect x="194" y="242" width="4" height="15" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+
+    <!-- Center main tall skyscraper: Left Face -->
+    <path d="M 248 70 L 216 112 L 216 335 L 248 335 Z" fill="url(#towerCenterGrad)" />
+    <!-- Center main tall skyscraper: Right Face -->
+    <path d="M 248 70 L 280 112 L 280 335 L 248 335 Z" fill="url(#towerCenterRightFace)" />
+    <!-- Center building windows (left face) -->
+    <rect x="224" y="160" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="234" y="160" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="224" y="180" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="234" y="180" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="224" y="200" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="234" y="200" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="224" y="220" width="6" height="11" rx="1" fill="#FFFFFF" />
+    <rect x="234" y="220" width="6" height="11" rx="1" fill="#FFFFFF" />
+
+    <!-- Right skyscraper -->
+    <path d="M 284 190 L 324 165 L 324 330 L 284 330 Z" fill="url(#towerRightGrad)" />
+    <!-- Right building windows -->
+    <rect x="292" y="200" width="5" height="14" rx="1.5" fill="#FFFFFF" />
+    <rect x="292" y="222" width="5" height="14" rx="1.5" fill="#FFFFFF" />
+    <rect x="292" y="244" width="5" height="14" rx="1.5" fill="#FFFFFF" />
+    <rect x="306" y="195" width="5" height="14" rx="1.5" fill="#FFFFFF" />
+    <rect x="306" y="217" width="5" height="14" rx="1.5" fill="#FFFFFF" />
+    <rect x="306" y="239" width="5" height="14" rx="1.5" fill="#FFFFFF" />
+  </g>
+
+  <!-- SMART STREETLAMP WITH WI-FI ARCS -->
+  <g id="streetlight">
+    <!-- Lamp pole and curved neck -->
+    <path d="M 338 290 L 338 190 Q 338 170 354 170 L 366 170 Q 372 170 374 176 L 370 182 Q 366 186 356 184 L 350 184 Q 346 184 346 192 L 346 290 Z" fill="#0E7490" />
+    <!-- Luminaire head / bulb fixture -->
+    <ellipse cx="362" cy="184" rx="10" ry="5.5" fill="#0D9488" />
+
+    <!-- Smart City Wifi / Wireless Waves -->
+    <!-- Inner wave -->
+    <path d="M 350 152 A 16 16 0 0 1 374 152" fill="none" stroke="url(#signalGrad)" stroke-width="4.5" stroke-linecap="round" />
+    <!-- Middle wave -->
+    <path d="M 342 138 A 28 28 0 0 1 382 138" fill="none" stroke="url(#signalGrad)" stroke-width="5" stroke-linecap="round" />
+    <!-- Outer wave -->
+    <path d="M 334 124 A 40 40 0 0 1 390 124" fill="none" stroke="url(#signalGrad)" stroke-width="5.5" stroke-linecap="round" />
+  </g>
+
+  <!-- BOTTOM CRADLE: LEAVES AND WINDING ROAD -->
+  <g id="cradle">
+    <!-- Left Leaf / Ocean Arc: curves from left edge (x=134) across bottom (y=386) to right -->
+    <path d="M 134 235 C 134 300 170 380 250 386 C 215 350 200 300 240 260 C 200 250 155 240 134 235 Z" fill="url(#leafLeftGrad)" />
+
+    <!-- Main Left Green/Teal Base -->
+    <path d="M 134 236 C 136 325 195 388 260 388 C 220 370 196 332 188 284 C 212 290 236 294 256 295 L 256 266 C 200 262 160 252 134 236 Z" fill="#0D5C56" />
+
+    <!-- Right Lush Leaf Swoosh -->
+    <path d="M 235 388 C 310 388 368 316 364 240 C 330 256 290 274 258 290 C 265 330 255 365 235 388 Z" fill="url(#leafRightGrad)" />
+
+    <!-- Base full teardrop curve silhouette -->
+    <path d="M 134 235 C 134 330 205 388 260 388 C 325 388 366 325 366 240 C 340 260 295 285 245 285 C 190 285 155 255 134 235 Z" fill="url(#leafLeftGrad)" />
+
+    <path d="M 245 285 C 298 285 342 258 366 240 C 366 320 322 388 260 388 C 248 388 238 386 230 382 C 255 355 260 318 245 285 Z" fill="url(#leafRightGrad)" />
+
+    <!-- Winding Clean White Road running through the landscape into the city -->
+    <path d="M 208 388 C 208 360 230 330 245 298 C 250 286 256 270 262 255 L 268 256 C 262 272 256 288 252 300 C 238 332 222 360 220 388 Z" fill="#FFFFFF" />
+    <path d="M 188 380 C 190 350 222 320 240 288 C 245 278 250 265 254 255 L 262 256 C 258 267 252 280 247 291 C 228 324 202 352 198 384 Z" fill="#FFFFFF" />
+  </g>
+</svg>
