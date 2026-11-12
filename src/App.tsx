@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { User, Complaint } from './types';
 import { dataStore } from './services/dataStore';
 import { authService } from './services/authService';
@@ -36,6 +36,28 @@ export default function App() {
   const [authorityModalComplaint, setAuthorityModalComplaint] = useState<Complaint | null>(null);
   const [isAuthorityConfirmed, setIsAuthorityConfirmed] = useState<boolean>(false);
   const [rejectModalComplaint, setRejectModalComplaint] = useState<Complaint | null>(null);
+
+  // Background Earth Video state & accessibility controls
+  const earthVideoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    if (currentView !== 'home') return;
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleMotion = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (earthVideoRef.current) {
+        if (e.matches) {
+          earthVideoRef.current.pause();
+        } else {
+          earthVideoRef.current.play().catch(() => {});
+        }
+      }
+    };
+    handleMotion(mediaQuery);
+    mediaQuery.addEventListener('change', handleMotion);
+    return () => mediaQuery.removeEventListener('change', handleMotion);
+  }, [currentView]);
 
   // Subscribe to data store updates & auth
   useEffect(() => {
@@ -129,8 +151,48 @@ export default function App() {
     createdAt: new Date().toISOString(),
   };
 
+  const isHomePage = currentView === 'home';
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans">
+    <div
+      className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
+        isHomePage
+          ? 'bg-transparent text-white relative selection:bg-[#00D6B8]/30 selection:text-[#22D3EE] overflow-x-hidden'
+          : 'bg-[#F8FAFC] text-[#0F172A]'
+      }`}
+    >
+      {/* SINGLE REUSABLE FULL-SCREEN ROTATING EARTH VIDEO BACKGROUND (HOMEPAGE ONLY) */}
+      {isHomePage && (
+        <div
+          className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none bg-[#020817]"
+          aria-hidden="true"
+        >
+          {!videoError && (
+            <video
+              ref={earthVideoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onCanPlay={() => {
+                setVideoLoaded(true);
+                earthVideoRef.current?.play().catch(() => {});
+              }}
+              onError={() => setVideoError(true)}
+              className={`w-full h-full object-cover object-center transition-opacity duration-1000 ${
+                videoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              src="/Earth_rotating.mp4"
+            />
+          )}
+
+          {/* Subtle dark cinematic overlay: slightly stronger on left for hero typography while preserving Earth on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020817]/90 via-[#020817]/60 to-[#020817]/25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/75 via-transparent to-[#020817]/85" />
+        </div>
+      )}
+
       {/* GLOBAL GLASS TOP NAVBAR */}
       <Navbar
         currentUser={currentUser}
@@ -144,7 +206,7 @@ export default function App() {
         isMobileMenuOpen={isMobileMenuOpen}
       />
 
-      <div className="flex-1 flex w-full">
+      <div className="flex-1 flex w-full relative z-10">
         {/* SIDEBAR (VISIBLE ON DASHBOARD & OPERATIONAL VIEWS) */}
         {showSidebar && (
           <Sidebar
@@ -160,7 +222,7 @@ export default function App() {
 
         {/* MAIN CONTENT VIEW CONTAINER */}
         <main
-          className={`flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full transition-all ${
+          className={`flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full transition-all relative z-10 ${
             !showSidebar ? 'max-w-none p-0 sm:p-0 lg:p-0' : ''
           }`}
         >

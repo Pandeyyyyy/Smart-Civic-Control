@@ -16,18 +16,10 @@ import {
   Construction,
   ArrowRight,
   Shield,
-  Sparkles,
-  ChevronDown,
-  Clock,
-  Layers,
   Phone,
   Mail,
   Check,
 } from 'lucide-react';
-import { DEMO_PRESETS } from '../data/seedData';
-
-// Static public asset path for the building + nature hero background
-const heroCityNatureImg = '/hero-city-nature.jpg';
 
 interface HomeViewProps {
   currentUser: User | null;
@@ -164,176 +156,180 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-transparent text-white relative selection:bg-[#00D6B8]/30 selection:text-[#22D3EE] overflow-x-hidden">
       {/* ---------------------------------------------------- */}
-      {/* 1. HERO SECTION: BUILDING + NATURE BACKGROUND & GLASS HERO */}
+      {/* 1. HERO SECTION: CINEMATIC LEFT-ALIGNED HERO */}
       {/* ---------------------------------------------------- */}
       <section
         ref={heroRef}
         data-section="hero"
-        className="relative min-h-[92vh] flex items-center justify-center pt-8 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        className="relative min-h-[92vh] flex items-center pt-24 sm:pt-28 pb-20 px-4 sm:px-6 lg:px-12 overflow-hidden"
       >
-        {/* REAL BUILDING + NATURE BACKGROUND IMAGE (SMART CITY SKYLINE + GREEN TREES + BLUE SKY) */}
-        <div
-          className="absolute inset-0 -z-20 overflow-hidden bg-cover bg-center bg-no-repeat bg-slate-900"
-          style={{ backgroundImage: `url('${heroCityNatureImg}')` }}
-        >
-          <img
-            src={heroCityNatureImg}
-            alt="Smart City Skyline with Green Parks, Trees, and Nature"
-            className="w-full h-full object-cover object-center scale-100 transition-transform duration-1000 ease-out"
-            referrerPolicy="no-referrer"
-          />
-        </div>
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* LEFT SIDE: BRANDING, HEADLINE, CTAS, TESTBED */}
+          <div
+            className={`lg:col-span-7 xl:col-span-7 text-left transition-all duration-700 ${
+              visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+          >
+            {/* BRANDING BADGE */}
+            <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-[#031223]/70 backdrop-blur-md border border-cyan-500/30 shadow-lg shadow-cyan-950/20 mb-6">
+              <LogoSymbol size={28} showAura />
+              <span className="text-xs sm:text-sm font-semibold text-cyan-300 tracking-tight">
+                Smart Civic Connect
+              </span>
+              <span className="text-[10px] text-cyan-400/80 font-medium hidden sm:inline border-l border-cyan-500/30 pl-2">
+                AI Urban Service Platform
+              </span>
+            </div>
 
-        {/* REFINED READABILITY OVERLAY: PRESERVES VIVID SKYLINE, GREEN TREES & NATURE WHILE ENSURING CRISP CONTRAST FOR TEXT */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-900/40 to-[#F8FAFC]/90 -z-10" />
+            {/* MAIN HEADLINE */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white tracking-tight leading-[1.12] drop-shadow-xl">
+              Cleaner Cities, <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D6B8] via-[#22D3EE] to-[#38BDF8]">
+                Happier Communities
+              </span>
+            </h1>
 
-        <div
-          className={`max-w-4xl mx-auto text-center transition-all duration-700 ${
-            visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          {/* LOGO SYMBOL + TITLE BADGE */}
-          <div className="inline-flex items-center space-x-3 px-4 py-2 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-md mb-6 animate-in fade-in duration-500">
-            <LogoSymbol size={38} showAura />
-            <span className="text-sm font-bold text-slate-900 tracking-tight">
-              Smart Civic Connect
-            </span>
-          </div>
+            {/* SUPPORTING DESCRIPTION */}
+            <p className="mt-5 text-base sm:text-lg text-slate-200/90 max-w-xl font-normal leading-relaxed drop-shadow-md">
+              AI-powered civic complaint management for smarter, safer communities.
+              Report urban issues with instant multimodal vision and geocoded ward routing.
+            </p>
 
-          {/* MAIN HEADLINES FROM SPECIFICATION */}
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
-            Cleaner Cities, <br />
-            <span className="text-teal-200">Happier Communities</span>
-          </h1>
-
-          <p className="mt-4 text-base sm:text-xl text-slate-100 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow-sm">
-            AI-powered civic complaint management for smarter, safer communities.
-            Report urban issues with instant multimodal vision and geocoded ward routing.
-          </p>
-
-          {/* CALL TO ACTION BUTTONS */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-            <button
-              type="button"
-              onClick={() => {
-                if (currentUser) {
-                  onNavigate('report_problem');
-                } else {
-                  onNavigate('login');
-                }
-              }}
-              className="py-3 px-7 rounded-2xl bg-[#0F766E] hover:bg-[#115E59] text-white text-sm font-semibold shadow-xl shadow-teal-900/30 flex items-center space-x-2 transition-all hover:scale-[1.02]"
-            >
-              <span>Report a Problem</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('how-it-works');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="py-3 px-6 rounded-2xl bg-white/85 hover:bg-white text-slate-900 text-sm font-semibold border border-white/60 shadow-lg backdrop-blur-md transition-all hover:scale-[1.02]"
-            >
-              <span>Learn How It Works</span>
-            </button>
-
-            {currentUser?.role === 'admin' && (
+            {/* CALL TO ACTION BUTTONS */}
+            <div className="mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">
               <button
                 type="button"
-                onClick={() => onNavigate('admin_dashboard')}
-                className="py-3 px-6 rounded-2xl bg-slate-900/80 hover:bg-slate-900 text-white text-sm font-semibold border border-white/20 backdrop-blur-md transition-all flex items-center space-x-1.5"
+                onClick={() => {
+                  if (currentUser) {
+                    onNavigate('report_problem');
+                  } else {
+                    onNavigate('login');
+                  }
+                }}
+                className="py-3.5 px-7 rounded-2xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-sm font-semibold shadow-lg shadow-teal-500/25 flex items-center space-x-2 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
               >
-                <Shield className="w-4 h-4 text-teal-400" />
-                <span>Admin Operations</span>
+                <span>Report a Problem</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
-            )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('how-it-works');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="py-3.5 px-6 rounded-2xl bg-[#031223]/65 hover:bg-[#071A2F]/80 text-white text-sm font-semibold border border-cyan-500/25 shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] hover:border-cyan-400/50 cursor-pointer"
+              >
+                <span>Learn How It Works</span>
+              </button>
+
+              {currentUser?.role === 'admin' && (
+                <button
+                  type="button"
+                  onClick={() => onNavigate('admin_dashboard')}
+                  className="py-3.5 px-6 rounded-2xl bg-[#031223]/80 hover:bg-slate-900 text-white text-sm font-semibold border border-teal-500/30 backdrop-blur-md transition-all flex items-center space-x-2 hover:border-teal-400 cursor-pointer"
+                >
+                  <Shield className="w-4 h-4 text-teal-400" />
+                  <span>Admin Operations</span>
+                </button>
+              )}
+            </div>
+
+            {/* OPERATIONAL TESTBED INDICATOR */}
+            <div className="mt-8 inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-[#031223]/60 backdrop-blur-md border border-cyan-500/20 text-xs text-slate-300 shadow-md">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00D6B8] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00D6B8]"></span>
+              </span>
+              <span className="text-slate-400">Operational Testbed:</span>
+              <strong className="text-white font-semibold">Mumbai • Dahisar (R/North Demo Wards 01–06)</strong>
+            </div>
           </div>
 
-          {/* DEMO TESTBED NOTICE */}
-          <div className="mt-6 inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-md border border-white/60 text-xs text-slate-700 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#0F766E]" />
-            <span>Operational Testbed:</span>
-            <strong className="text-slate-900">Mumbai • Dahisar (R/North Demo Wards 01–06)</strong>
+          {/* RIGHT SIDE: CLEAR SPACE FOR THE ROTATING EARTH BACKGROUND VIDEO */}
+          <div
+            className="hidden lg:block lg:col-span-5 xl:col-span-5 min-h-[420px] pointer-events-none select-none"
+            aria-hidden="true"
+          >
+            {/* Transparent clear zone allowing full visibility of the rotating Earth in the background video */}
           </div>
         </div>
       </section>
 
       {/* ---------------------------------------------------- */}
-      {/* 2. STATS & LIVE CIVIC INTELLIGENCE PANEL (WITH COUNTER ANIMATIONS) */}
+      {/* 2. STATS & LIVE CIVIC INTELLIGENCE PANEL */}
       {/* ---------------------------------------------------- */}
       <section
         ref={statsRef}
         data-section="stats"
-        className="max-w-6xl mx-auto px-4 sm:px-6 -mt-10 mb-16 relative z-10"
+        className="max-w-6xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-10 mb-20 relative z-10"
       >
         <div
-          className={`p-6 sm:p-8 rounded-3xl bg-white/85 backdrop-blur-2xl border border-white/70 shadow-xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center transition-all duration-700 ${
+          className={`p-6 sm:p-8 rounded-3xl bg-[#031223]/65 backdrop-blur-xl border border-cyan-500/20 shadow-2xl shadow-black/50 grid grid-cols-2 md:grid-cols-4 gap-6 text-center transition-all duration-700 ${
             visibleSections.stats ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-[#0F766E] tracking-tight">
+          <div className="p-3 rounded-2xl hover:bg-white/5 transition-colors">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#00D6B8] tracking-tight drop-shadow-sm">
               {resolvedCount}+
             </span>
-            <h4 className="text-xs font-bold text-slate-800 mt-1 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white mt-1.5 uppercase tracking-wider">
               Issues Resolved
             </h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Across Dahisar R/North</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">Across Dahisar R/North</p>
           </div>
 
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <div className="p-3 rounded-2xl hover:bg-white/5 transition-colors">
+            <span className="text-3xl sm:text-4xl font-extrabold text-cyan-300 tracking-tight drop-shadow-sm">
               {accuracyCount}%
             </span>
-            <h4 className="text-xs font-bold text-slate-800 mt-1 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white mt-1.5 uppercase tracking-wider">
               AI Accuracy Match
             </h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Multimodal Vision + NLP</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">Multimodal Vision + NLP</p>
           </div>
 
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-teal-700 tracking-tight">
+          <div className="p-3 rounded-2xl hover:bg-white/5 transition-colors">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#00D6B8] tracking-tight drop-shadow-sm">
               {wardCount}
             </span>
-            <h4 className="text-xs font-bold text-slate-800 mt-1 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white mt-1.5 uppercase tracking-wider">
               Demo Wards Covered
             </h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">East & West Sectors</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">East & West Sectors</p>
           </div>
 
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <div className="p-3 rounded-2xl hover:bg-white/5 transition-colors">
+            <span className="text-3xl sm:text-4xl font-extrabold text-cyan-300 tracking-tight drop-shadow-sm">
               &lt; {responseHours}h
             </span>
-            <h4 className="text-xs font-bold text-slate-800 mt-1 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white mt-1.5 uppercase tracking-wider">
               Avg Field Dispatch
             </h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Target SLA Execution</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">Target SLA Execution</p>
           </div>
         </div>
       </section>
 
       {/* ---------------------------------------------------- */}
-      {/* 3. HOW IT WORKS SECTION (WITH SEQUENTIAL REVEAL) */}
+      {/* 3. HOW IT WORKS SECTION */}
       {/* ---------------------------------------------------- */}
       <section
         id="how-it-works"
         ref={howItWorksRef}
         data-section="howItWorks"
-        className="max-w-6xl mx-auto px-4 sm:px-6 py-12"
+        className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10"
       >
         <div className="text-center mb-12">
-          <span className="text-xs font-bold tracking-widest text-[#0F766E] uppercase">
+          <span className="text-xs font-bold tracking-widest text-[#00D6B8] uppercase">
             Civic Resolution Workflow
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-2 tracking-tight">
             How Smart Civic Connect Works
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-2 max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-lg mx-auto">
             From smartphone image capture to automated municipal field dispatch in 5 seamless steps.
           </p>
         </div>
@@ -349,20 +345,20 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
                 style={{
                   transitionDelay: `${idx * 120}ms`,
                 }}
-                className={`p-5 rounded-3xl bg-white/75 backdrop-blur-xl border border-white/60 shadow-xs hover:shadow-md transition-all duration-500 ${
+                className={`p-5 rounded-3xl bg-[#031223]/65 backdrop-blur-xl border border-cyan-500/15 hover:border-cyan-400/50 shadow-xl hover:shadow-cyan-950/40 hover:-translate-y-1.5 transition-all duration-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-extrabold text-teal-700 tracking-wider">
+                  <span className="text-xs font-extrabold text-[#00D6B8] tracking-wider">
                     {st.num}
                   </span>
-                  <div className="p-2.5 rounded-xl bg-teal-50 text-[#0F766E] shadow-2xs">
+                  <div className="p-2.5 rounded-xl bg-cyan-950/60 border border-cyan-500/25 text-[#22D3EE] shadow-sm">
                     <Icon className="w-4 h-4" />
                   </div>
                 </div>
-                <h3 className="text-sm font-bold text-slate-900">{st.title}</h3>
-                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">{st.desc}</p>
+                <h3 className="text-sm font-bold text-white">{st.title}</h3>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">{st.desc}</p>
               </div>
             );
           })}
@@ -370,22 +366,22 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
       </section>
 
       {/* ---------------------------------------------------- */}
-      {/* 4. PROBLEM CATEGORIES SECTION (STAGGERED CARDS) */}
+      {/* 4. PROBLEM CATEGORIES SECTION */}
       {/* ---------------------------------------------------- */}
       <section
         id="categories"
         ref={categoriesRef}
         data-section="categories"
-        className="max-w-6xl mx-auto px-4 sm:px-6 py-12"
+        className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10"
       >
         <div className="text-center mb-10">
-          <span className="text-xs font-bold tracking-widest text-[#0F766E] uppercase">
+          <span className="text-xs font-bold tracking-widest text-[#00D6B8] uppercase">
             Multimodal Classification
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-2 tracking-tight">
             Supported Problem Categories
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-2 max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-lg mx-auto">
             Our vision pipeline classifies urban issues into 9 distinct municipal categories.
           </p>
         </div>
@@ -405,15 +401,17 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
                   if (currentUser) onNavigate('report_problem');
                   else onNavigate('login');
                 }}
-                className={`p-5 rounded-3xl bg-white/80 backdrop-blur-xl border border-slate-200/60 hover:border-teal-300 shadow-xs hover:shadow-md cursor-pointer transition-all duration-500 hover:-translate-y-1 ${
+                className={`p-5 rounded-3xl bg-[#031223]/65 backdrop-blur-xl border border-cyan-500/15 hover:border-cyan-400/60 shadow-lg hover:shadow-cyan-950/30 cursor-pointer transition-all duration-300 hover:-translate-y-1 group ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
               >
-                <div className="w-10 h-10 rounded-2xl bg-teal-50 flex items-center justify-center text-[#0F766E] mb-3">
+                <div className="w-10 h-10 rounded-2xl bg-cyan-950/60 border border-cyan-500/25 flex items-center justify-center text-[#00D6B8] group-hover:text-cyan-300 group-hover:border-cyan-400/50 mb-3 transition-colors">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-xs sm:text-sm font-bold text-slate-900">{cat.label}</h3>
-                <p className="text-[11px] text-slate-500 mt-1 truncate">{cat.dept}</p>
+                <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  {cat.label}
+                </h3>
+                <p className="text-[11px] text-slate-400 mt-1 truncate">{cat.dept}</p>
               </div>
             );
           })}
@@ -427,52 +425,52 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
         id="about"
         ref={aboutRef}
         data-section="about"
-        className="max-w-6xl mx-auto px-4 sm:px-6 py-16"
+        className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10"
       >
         <div
-          className={`p-8 sm:p-12 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/70 shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-8 items-center transition-all duration-700 ${
+          className={`p-8 sm:p-12 rounded-3xl bg-[#031223]/65 backdrop-blur-2xl border border-cyan-500/20 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center transition-all duration-700 ${
             visibleSections.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           <div className="lg:col-span-7 space-y-4">
-            <span className="text-xs font-bold text-[#0F766E] tracking-widest uppercase">
+            <span className="text-xs font-bold text-[#00D6B8] tracking-widest uppercase">
               About Smart Civic Connect
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
               Pioneering Clean, Sustainable Communities Through Civic Intelligence
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Smart Civic Connect transforms municipal service delivery by eliminating red tape and classification guesswork. By uniting computer vision with localized geographic boundaries, grievances are directed to the exact engineers responsible within seconds of reporting.
             </p>
 
-            <div className="space-y-2.5 pt-2 text-xs text-slate-700">
-              <div className="flex items-center space-x-2.5">
-                <div className="w-5 h-5 rounded-full bg-teal-50 text-[#0F766E] flex items-center justify-center shrink-0">
+            <div className="space-y-3 pt-2 text-xs text-slate-300">
+              <div className="flex items-center space-x-3">
+                <div className="w-5 h-5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-[#00D6B8] flex items-center justify-center shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </div>
-                <span><strong>No Fake Predictions:</strong> Robust inference with transparent fallback and low-confidence warnings.</span>
+                <span><strong className="text-white">No Fake Predictions:</strong> Robust inference with transparent fallback and low-confidence warnings.</span>
               </div>
-              <div className="flex items-center space-x-2.5">
-                <div className="w-5 h-5 rounded-full bg-teal-50 text-[#0F766E] flex items-center justify-center shrink-0">
+              <div className="flex items-center space-x-3">
+                <div className="w-5 h-5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-[#00D6B8] flex items-center justify-center shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </div>
-                <span><strong>Separation of Concerns:</strong> Administrative wards derived from coordinates, never from images.</span>
+                <span><strong className="text-white">Separation of Concerns:</strong> Administrative wards derived from coordinates, never from images.</span>
               </div>
-              <div className="flex items-center space-x-2.5">
-                <div className="w-5 h-5 rounded-full bg-teal-50 text-[#0F766E] flex items-center justify-center shrink-0">
+              <div className="flex items-center space-x-3">
+                <div className="w-5 h-5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-[#00D6B8] flex items-center justify-center shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </div>
-                <span><strong>Transparent Accountability:</strong> Complete resolution audit trails with citizen satisfaction ratings.</span>
+                <span><strong className="text-white">Transparent Accountability:</strong> Complete resolution audit trails with citizen satisfaction ratings.</span>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-5 relative">
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-white/80">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-cyan-500/30 group">
               <img
                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
                 alt="Modern sustainable architecture with greenery"
-                className="w-full h-80 object-cover"
+                className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 hover:opacity-100"
               />
             </div>
           </div>
@@ -486,30 +484,30 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
         id="contact"
         ref={contactRef}
         data-section="contact"
-        className="max-w-4xl mx-auto px-4 sm:px-6 py-12 text-center"
+        className="max-w-4xl mx-auto px-4 sm:px-6 py-16 text-center relative z-10"
       >
         <div
-          className={`p-8 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs space-y-4 transition-all duration-700 ${
+          className={`p-8 rounded-3xl bg-[#031223]/65 backdrop-blur-xl border border-cyan-500/20 shadow-xl space-y-4 transition-all duration-700 ${
             visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <h2 className="text-xl font-bold text-slate-900">Municipal Grievance Helpline</h2>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Municipal Grievance Helpline</h2>
+          <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
             Operating under Dahisar R/North Administrative Ward. For life-threatening emergencies, dial emergency services immediately.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-700">
-            <div className="flex items-center space-x-2">
-              <Phone className="w-4 h-4 text-[#0F766E]" />
-              <span>Helpline: <strong>1916</strong> (Toll Free)</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-3 text-xs text-slate-300">
+            <div className="flex items-center space-x-2 bg-slate-900/40 px-3.5 py-2 rounded-xl border border-cyan-500/15">
+              <Phone className="w-4 h-4 text-[#00D6B8]" />
+              <span>Helpline: <strong className="text-white font-semibold">1916</strong> (Toll Free)</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="w-4 h-4 text-[#0F766E]" />
-              <span>Email: <strong>desk.rnorth@smartcivic.gov.in</strong></span>
+            <div className="flex items-center space-x-2 bg-slate-900/40 px-3.5 py-2 rounded-xl border border-cyan-500/15">
+              <Mail className="w-4 h-4 text-[#00D6B8]" />
+              <span>Email: <strong className="text-white font-semibold">desk.rnorth@smartcivic.gov.in</strong></span>
             </div>
-            <div className="flex items-center space-x-2">
-              <MapPin className="w-4 h-4 text-[#0F766E]" />
-              <span>Location: <strong>Dahisar, Mumbai 400068</strong></span>
+            <div className="flex items-center space-x-2 bg-slate-900/40 px-3.5 py-2 rounded-xl border border-cyan-500/15">
+              <MapPin className="w-4 h-4 text-[#00D6B8]" />
+              <span>Location: <strong className="text-white font-semibold">Dahisar, Mumbai 400068</strong></span>
             </div>
           </div>
         </div>
@@ -518,13 +516,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ currentUser, onNavigate }) =
       {/* ---------------------------------------------------- */}
       {/* 7. FOOTER */}
       {/* ---------------------------------------------------- */}
-      <footer className="border-t border-slate-200/80 bg-white/60 backdrop-blur-xl py-10">
+      <footer className="border-t border-cyan-500/15 bg-[#020817]/60 backdrop-blur-xl py-10 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2.5">
             <LogoSymbol size={30} />
-            <span className="text-sm font-bold text-slate-900">Smart Civic Connect</span>
+            <span className="text-sm font-bold text-white tracking-tight">Smart Civic Connect</span>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400 text-center sm:text-right">
             AI-Based Civic Complaint and Urban Service Management System • Academic College Demonstration
           </p>
         </div>
