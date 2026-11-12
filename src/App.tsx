@@ -155,10 +155,10 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
+      className={`min-h-screen flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden ${
         isHomePage
-          ? 'bg-transparent text-white relative selection:bg-[#00D6B8]/30 selection:text-[#22D3EE] overflow-x-hidden'
-          : 'bg-[#F8FAFC] text-[#0F172A]'
+          ? 'bg-transparent text-white selection:bg-[#00D6B8]/30 selection:text-[#22D3EE]'
+          : 'bg-transparent text-white selection:bg-[#00D6B8]/30 selection:text-[#22D3EE]'
       }`}
     >
       {/* SINGLE REUSABLE FULL-SCREEN ROTATING EARTH VIDEO BACKGROUND (HOMEPAGE ONLY) */}
@@ -190,6 +190,22 @@ export default function App() {
           {/* Subtle dark cinematic overlay: slightly stronger on left for hero typography while preserving Earth on right */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#020817]/90 via-[#020817]/60 to-[#020817]/25" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/75 via-transparent to-[#020817]/85" />
+        </div>
+      )}
+
+      {/* SINGLE REUSABLE FULL-SCREEN NEBULA SPACE BACKGROUND (ALL NON-HOME PAGES) */}
+      {!isHomePage && (
+        <div
+          className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none bg-[#020817]"
+          aria-hidden="true"
+        >
+          <img
+            src="/Nebula_space.png"
+            alt="Nebula space background"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Subtle dark cinematic overlay to ensure excellent readability of content, cards and text */}
+          <div className="absolute inset-0 bg-[#020817]/35" />
         </div>
       )}
 

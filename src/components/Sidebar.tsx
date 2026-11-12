@@ -82,7 +82,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* SIDEBAR CONTAINER */}
       <aside
-        className={`fixed md:sticky top-0 left-0 z-50 h-screen w-64 flex flex-col justify-between p-4 border-r border-slate-200/80 bg-white/80 backdrop-blur-xl transition-transform duration-300 md:translate-x-0 ${
+        className={`fixed md:sticky top-0 left-0 z-50 h-screen w-64 flex flex-col justify-between p-4 border-r border-cyan-500/20 bg-[#031223]/80 backdrop-blur-xl transition-transform duration-300 md:translate-x-0 shadow-2xl ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -90,26 +90,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div>
           <div
             onClick={() => handleItemClick('home')}
-            className="flex items-center space-x-3 px-2 py-3 mb-4 rounded-2xl cursor-pointer hover:bg-slate-50 transition-colors select-none"
+            className="flex items-center space-x-3 px-2 py-3 mb-4 rounded-2xl cursor-pointer hover:bg-white/5 transition-colors select-none group"
           >
             <LogoSymbol size={42} showAura />
             <div className="flex flex-col">
-              <span className="text-base font-bold text-slate-900 tracking-tight leading-snug">
+              <span className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors tracking-tight leading-snug">
                 Smart Civic Connect
               </span>
               {isAdmin ? (
-                <div className="flex items-center space-x-1 text-[11px] font-bold text-[#0F766E] tracking-wider uppercase">
+                <div className="flex items-center space-x-1 text-[11px] font-bold text-[#00D6B8] tracking-wider uppercase">
                   <Shield className="w-3 h-3" />
                   <span>ADMIN OPERATIONS</span>
                 </div>
               ) : (
-                <span className="text-[11px] text-slate-500 font-medium">Citizen Portal</span>
+                <span className="text-[11px] text-cyan-400 font-medium">Citizen Portal</span>
               )}
             </div>
           </div>
 
           {/* SECTION HEADER */}
-          <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-cyan-400/80">
             {isAdmin ? 'MUNICIPAL OPERATIONS' : 'CITIZEN SERVICES'}
           </div>
 
@@ -127,30 +127,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onClick={() => handleItemClick(item.id)}
                   className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group relative ${
                     isActive
-                      ? 'bg-teal-50/80 text-teal-800 font-semibold shadow-xs'
+                      ? 'bg-cyan-950/70 border border-cyan-500/30 text-[#00D6B8] font-semibold shadow-xs'
                       : isHighlight
-                      ? 'bg-[#0F766E] text-white hover:bg-[#115E59] shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                      ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white shadow-md shadow-teal-900/40 font-semibold'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     {isActive && (
-                      <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-md bg-[#0F766E]" />
+                      <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-md bg-[#00D6B8]" />
                     )}
                     <Icon
                       className={`w-4 h-4 transition-transform group-hover:scale-110 ${
                         isActive
-                          ? 'text-[#0F766E]'
+                          ? 'text-[#00D6B8]'
                           : isHighlight
                           ? 'text-white'
-                          : 'text-slate-500 group-hover:text-slate-700'
+                          : 'text-slate-400 group-hover:text-cyan-300'
                       }`}
                     />
                     <span>{item.label}</span>
                   </div>
 
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0F766E] text-white">
+                    <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#00D6B8] text-slate-950">
                       {item.badge}
                     </span>
                   )}
@@ -161,28 +161,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* BOTTOM USER PROFILE & LOGOUT */}
-        <div className="pt-4 border-t border-slate-200/80 space-y-2">
+        <div className="pt-4 border-t border-cyan-500/20 space-y-2">
           {/* Quick Home view shortcut */}
           <button
             type="button"
             onClick={() => handleItemClick('home')}
-            className="w-full flex items-center space-x-3 px-3.5 py-2 rounded-xl text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-colors"
+            className="w-full flex items-center space-x-3 px-3.5 py-2 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
           >
             <Home className="w-4 h-4 text-slate-400" />
             <span>Public Home</span>
           </button>
 
           {/* Authenticated User Display Card */}
-          <div className="p-3 rounded-2xl bg-slate-50/90 border border-slate-200/60">
+          <div className="p-3 rounded-2xl bg-[#071A2F]/80 border border-cyan-500/20">
             <div className="flex items-center justify-between text-xs mb-1">
-              <span className="font-bold text-slate-900 truncate max-w-[130px]">
+              <span className="font-bold text-white truncate max-w-[130px]">
                 {currentUser.name}
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider bg-white border border-slate-200 text-teal-800">
+              <span className="text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider bg-cyan-950/80 border border-cyan-500/30 text-[#00D6B8]">
                 {currentUser.role}
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 truncate">{currentUser.email}</p>
+            <p className="text-[11px] text-slate-400 truncate">{currentUser.email}</p>
           </div>
 
           {/* Sign Out Button */}
@@ -192,9 +192,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onCloseMobile();
               onLogout();
             }}
-            className="w-full flex items-center space-x-3 px-3.5 py-2 rounded-xl text-xs text-slate-500 hover:text-rose-600 hover:bg-rose-50/60 transition-colors font-medium"
+            className="w-full flex items-center space-x-3 px-3.5 py-2 rounded-xl text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors font-medium"
           >
-            <LogOut className="w-4 h-4 text-slate-400 group-hover:text-rose-600" />
+            <LogOut className="w-4 h-4 text-rose-400 group-hover:text-rose-300" />
             <span>Sign Out</span>
           </button>
         </div>

@@ -79,7 +79,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
   return (
     <div
-      className={`relative w-full rounded-2xl overflow-hidden border border-slate-200/80 bg-[#EEF2F7] shadow-sm select-none ${className}`}
+      className={`relative w-full rounded-2xl overflow-hidden border border-cyan-500/25 bg-[#031223]/90 shadow-sm select-none ${className}`}
       style={{ height }}
     >
       {/* MAP BACKGROUND GRAPHIC (DAHISAR, MUMBAI URBAN GRID & WARDS) */}
@@ -280,11 +280,11 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
       {/* TOP CONTROLS OVERLAY (GLASS PANEL) */}
       <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-        <div className="pointer-events-auto px-3 py-1.5 rounded-xl bg-white/80 backdrop-blur-md border border-white/60 shadow-sm flex items-center space-x-2 text-xs font-medium text-slate-700">
-          <Navigation className="w-3.5 h-3.5 text-[#0F766E]" />
+        <div className="pointer-events-auto px-3 py-1.5 rounded-xl bg-[#031223]/80 backdrop-blur-md border border-cyan-500/25 shadow-sm flex items-center space-x-2 text-xs font-medium text-white">
+          <Navigation className="w-3.5 h-3.5 text-[#00D6B8]" />
           <span>Mumbai • Dahisar (R/North)</span>
-          <span className="text-slate-400">|</span>
-          <span className="text-teal-700 font-semibold">{complaints.length} issues</span>
+          <span className="text-slate-500">|</span>
+          <span className="text-[#00D6B8] font-semibold">{complaints.length} issues</span>
         </div>
 
         <div className="pointer-events-auto flex items-center space-x-1.5">
@@ -293,8 +293,8 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             onClick={() => setShowWardBoundaries(!showWardBoundaries)}
             className={`p-2 rounded-xl border backdrop-blur-md shadow-sm text-xs flex items-center space-x-1 transition-colors ${
               showWardBoundaries
-                ? 'bg-teal-700 text-white border-teal-600'
-                : 'bg-white/80 text-slate-700 border-white/60 hover:bg-white'
+                ? 'bg-[#00D6B8] text-slate-950 font-bold border-cyan-400'
+                : 'bg-[#031223]/80 text-slate-200 border-cyan-500/25 hover:bg-[#071A2F]'
             }`}
             title="Toggle Demo Ward Boundaries"
           >
@@ -305,7 +305,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <button
             type="button"
             onClick={() => setZoom((z) => Math.min(1.6, z + 0.2))}
-            className="p-2 rounded-xl bg-white/80 backdrop-blur-md border border-white/60 shadow-sm text-slate-700 hover:bg-white transition-colors"
+            className="p-2 rounded-xl bg-[#031223]/80 backdrop-blur-md border border-cyan-500/25 shadow-sm text-slate-200 hover:bg-[#071A2F] transition-colors"
             title="Zoom In"
           >
             <ZoomIn className="w-3.5 h-3.5" />
@@ -313,7 +313,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <button
             type="button"
             onClick={() => setZoom((z) => Math.max(0.8, z - 0.2))}
-            className="p-2 rounded-xl bg-white/80 backdrop-blur-md border border-white/60 shadow-sm text-slate-700 hover:bg-white transition-colors"
+            className="p-2 rounded-xl bg-[#031223]/80 backdrop-blur-md border border-cyan-500/25 shadow-sm text-slate-200 hover:bg-[#071A2F] transition-colors"
             title="Zoom Out"
           >
             <ZoomOut className="w-3.5 h-3.5" />
@@ -323,21 +323,21 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
       {/* BOTTOM LEGEND OVERLAY */}
       <div className="absolute bottom-3 left-3 pointer-events-auto">
-        <div className="px-3 py-1.5 rounded-xl bg-white/85 backdrop-blur-md border border-white/70 shadow-sm flex items-center space-x-3 text-[11px] text-slate-600">
+        <div className="px-3 py-1.5 rounded-xl bg-[#031223]/85 backdrop-blur-md border border-cyan-500/25 shadow-sm flex items-center space-x-3 text-[11px] text-slate-300">
           <span className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
             <span>Pending</span>
           </span>
           <span className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-600" />
+            <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />
             <span>In Progress</span>
           </span>
           <span className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
             <span>Resolved</span>
           </span>
           <span className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-600" />
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
             <span>Rejected</span>
           </span>
         </div>
@@ -346,37 +346,37 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       {/* CLICKED MARKER GLASS INFO CARD */}
       {selectedMarker && (
         <div className="absolute top-14 left-4 right-4 sm:right-auto sm:w-80 pointer-events-auto z-30 animate-in fade-in zoom-in-95 duration-200">
-          <div className="p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-xl text-slate-800">
+          <div className="p-4 rounded-2xl bg-[#031223]/95 backdrop-blur-xl border border-cyan-500/30 shadow-2xl text-white">
             <div className="flex items-start justify-between">
               <div>
-                <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-teal-50 text-teal-700 border border-teal-200/60 mb-1">
+                <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-cyan-950/80 text-[#00D6B8] border border-cyan-500/30 mb-1">
                   {selectedMarker.complaintId}
                 </span>
-                <h4 className="text-sm font-semibold capitalize text-slate-900">
+                <h4 className="text-sm font-semibold capitalize text-white">
                   {selectedMarker.finalCategory.replace('_', ' ')}
                 </h4>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedMarker(null)}
-                className="text-slate-400 hover:text-slate-600 text-lg leading-none p-1"
+                className="text-slate-400 hover:text-white text-lg leading-none p-1"
               >
                 ×
               </button>
             </div>
 
-            <p className="text-xs text-slate-600 line-clamp-2 my-2">
+            <p className="text-xs text-slate-300 line-clamp-2 my-2">
               {selectedMarker.description}
             </p>
 
-            <div className="text-[11px] text-slate-500 space-y-0.5 border-t border-slate-100 pt-2 mb-3">
+            <div className="text-[11px] text-slate-400 space-y-0.5 border-t border-cyan-500/20 pt-2 mb-3">
               <div className="flex justify-between">
                 <span>Ward:</span>
-                <span className="font-medium text-slate-700">{selectedMarker.demoWardNumber}</span>
+                <span className="font-medium text-white">{selectedMarker.demoWardNumber}</span>
               </div>
               <div className="flex justify-between">
                 <span>Dept:</span>
-                <span className="font-medium text-slate-700 truncate max-w-[170px]">{selectedMarker.departmentName}</span>
+                <span className="font-medium text-white truncate max-w-[170px]">{selectedMarker.departmentName}</span>
               </div>
               <div className="flex justify-between">
                 <span>Status:</span>
@@ -393,7 +393,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
               <button
                 type="button"
                 onClick={() => onComplaintSelect(selectedMarker)}
-                className="w-full py-1.5 px-3 rounded-xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-medium flex items-center justify-center space-x-1.5 shadow-sm transition-colors"
+                className="w-full py-1.5 px-3 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-medium flex items-center justify-center space-x-1.5 shadow-sm transition-colors"
               >
                 <span>View Full Details</span>
                 <ExternalLink className="w-3.5 h-3.5" />

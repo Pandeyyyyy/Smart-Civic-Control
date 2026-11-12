@@ -426,15 +426,15 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-12">
       {/* HEADER & WIZARD PROGRESS TRACKER */}
-      <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs">
+      <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-6">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Report a Civic Problem</h2>
-            <p className="text-xs text-slate-500">
+            <h2 className="text-xl font-bold text-white tracking-tight">Report a Civic Problem</h2>
+            <p className="text-xs text-slate-300 mt-0.5">
               5-Step AI-Assisted Submission with Automatic Ward Detection & Department Routing
             </p>
           </div>
-          <span className="text-xs font-semibold text-teal-800 bg-teal-50 px-3 py-1 rounded-full border border-teal-200/60 self-start sm:self-auto">
+          <span className="text-xs font-semibold text-[#00D6B8] bg-cyan-950/60 px-3.5 py-1 rounded-full border border-cyan-500/30 self-start sm:self-auto shadow-xs">
             Dahisar R/North Testbed
           </span>
         </div>
@@ -456,10 +456,10 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 key={s.step}
                 className={`py-2 px-1 rounded-xl transition-all ${
                   isCompleted
-                    ? 'bg-teal-50 text-teal-800 font-semibold'
+                    ? 'bg-cyan-950/60 border border-cyan-500/30 text-[#00D6B8] font-semibold'
                     : isCurrent
-                    ? 'bg-[#0F766E] text-white font-bold shadow-xs ring-2 ring-teal-200'
-                    : 'bg-slate-100/70 text-slate-400'
+                    ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] text-white font-bold shadow-md shadow-teal-900/40 border border-cyan-400/50'
+                    : 'bg-slate-900/50 border border-cyan-500/15 text-slate-400'
                 }`}
               >
                 <span>{s.label}</span>
@@ -471,10 +471,10 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* QUICK PRESETS PICKER (Top quick-actions) */}
       {currentStep === 1 && (
-        <div className="p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-800 flex items-center space-x-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-teal-700" />
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/20 shadow-lg">
+          <div className="flex items-center justify-between mb-2.5">
+            <span className="text-xs font-bold text-white flex items-center space-x-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#00D6B8]" />
               <span>Load 1-Click Evaluation Presets</span>
             </span>
             <span className="text-[11px] text-slate-400">Pre-loads test image & data</span>
@@ -485,7 +485,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 type="button"
                 key={p.id}
                 onClick={() => loadPreset(p.id)}
-                className="py-1.5 px-3 rounded-xl bg-slate-100 hover:bg-teal-50 text-[11px] font-medium text-slate-700 hover:text-teal-900 border border-slate-200/60 transition-colors"
+                className="py-1.5 px-3.5 rounded-xl bg-slate-900/60 hover:bg-[#071A2F] text-[11px] font-medium text-slate-200 hover:text-white border border-cyan-500/20 hover:border-cyan-400/50 transition-all cursor-pointer"
               >
                 {p.label}
               </button>
@@ -496,16 +496,16 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* STEP 1: IMAGE UPLOAD */}
       {currentStep === 1 && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs space-y-6 animate-in fade-in duration-200">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-6 animate-in fade-in duration-200">
           <div className="text-center max-w-md mx-auto">
-            <h3 className="text-base font-bold text-slate-900">Upload Problem Image</h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">Upload Problem Image</h3>
+            <p className="text-xs text-slate-300 mt-1">
               Provide a clear photograph of the civic breakdown for multimodal AI classification.
             </p>
           </div>
 
           {/* DRAG & DROP ZONE */}
-          <div className="relative border-2 border-dashed border-slate-300 hover:border-teal-500 rounded-3xl p-8 text-center bg-slate-50/50 hover:bg-teal-50/30 transition-all cursor-pointer">
+          <div className="relative border-2 border-dashed border-cyan-500/30 hover:border-cyan-400/70 rounded-3xl p-8 text-center bg-[#071A2F]/50 hover:bg-[#071A2F]/80 backdrop-blur-md transition-all cursor-pointer group">
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp"
@@ -518,19 +518,19 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className="w-48 h-48 sm:w-64 sm:h-64 object-cover rounded-2xl shadow-md border border-slate-200 mb-3"
+                  className="w-48 h-48 sm:w-64 sm:h-64 object-cover rounded-2xl shadow-lg border border-cyan-500/30 mb-3"
                 />
-                <span className="text-xs font-semibold text-slate-700">{imageFileName}</span>
-                <span className="text-[11px] text-teal-700 mt-1 font-medium">
+                <span className="text-xs font-semibold text-white">{imageFileName}</span>
+                <span className="text-[11px] text-[#00D6B8] mt-1 font-medium">
                   Click or drag to replace photo
                 </span>
               </div>
             ) : (
               <div className="flex flex-col items-center py-6">
-                <div className="w-14 h-14 rounded-2xl bg-teal-50 text-[#0F766E] flex items-center justify-center mb-3 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-cyan-950/70 border border-cyan-500/30 text-[#00D6B8] flex items-center justify-center mb-3 shadow-sm group-hover:scale-105 transition-transform">
                   <Upload className="w-7 h-7" />
                 </div>
-                <h4 className="text-sm font-semibold text-slate-800">
+                <h4 className="text-sm font-semibold text-white">
                   Drag & drop or browse image
                 </h4>
                 <p className="text-xs text-slate-400 mt-1">Supports JPG • PNG • WEBP up to 10MB</p>
@@ -539,15 +539,15 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
           </div>
 
           {/* ACTION BUTTONS */}
-          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-cyan-500/20">
             <button
               type="button"
               disabled={!imagePreview}
               onClick={() => triggerAIAnalysis(imagePreview, imageFileName || 'complaint.jpg')}
               className={`py-3 px-6 rounded-2xl text-xs font-semibold flex items-center space-x-2 transition-all shadow-md ${
                 imagePreview
-                  ? 'bg-[#0F766E] hover:bg-[#115E59] text-white shadow-teal-700/20'
-                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white shadow-teal-500/25 cursor-pointer hover:scale-[1.02]'
+                  : 'bg-slate-900/60 text-slate-500 border border-slate-700/40 cursor-not-allowed'
               }`}
             >
               <span>Analyze with AI</span>
@@ -559,17 +559,17 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* STEP 2: AI SCANNING & PREDICTION RESULT */}
       {currentStep === 2 && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs space-y-6 animate-in fade-in duration-200">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-6 animate-in fade-in duration-200">
           {isScanning ? (
             <div className="py-16 text-center space-y-4">
               <div className="relative w-20 h-20 mx-auto">
-                <div className="absolute inset-0 rounded-full border-4 border-teal-200 border-t-[#0F766E] animate-spin" />
-                <div className="absolute inset-2 rounded-full bg-teal-50 flex items-center justify-center text-[#0F766E]">
+                <div className="absolute inset-0 rounded-full border-4 border-cyan-950 border-t-[#00D6B8] animate-spin" />
+                <div className="absolute inset-2 rounded-full bg-cyan-950/70 border border-cyan-500/30 flex items-center justify-center text-[#00D6B8]">
                   <Cpu className="w-8 h-8 animate-pulse" />
                 </div>
               </div>
-              <h3 className="text-base font-bold text-slate-900">Scanning Image with AI...</h3>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              <h3 className="text-base font-bold text-white">Scanning Image with AI...</h3>
+              <p className="text-xs text-slate-300 max-w-sm mx-auto">
                 Running real vision inference classifier across 9 civic infrastructure categories.
               </p>
             </div>
@@ -577,11 +577,11 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="flex items-center space-x-2 text-xs font-bold text-[#0F766E] uppercase tracking-wider">
+                  <div className="flex items-center space-x-2 text-xs font-bold text-[#00D6B8] uppercase tracking-wider">
                     <Sparkles className="w-4 h-4" />
                     <span>AI ANALYSIS RESULT</span>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mt-0.5">
+                  <h3 className="text-lg font-bold text-white mt-0.5">
                     Category: {getCategoryLabel(selectedCategory)}
                   </h3>
                 </div>
@@ -591,10 +591,10 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-bold ${
                       aiResult.confidenceLevel === 'High'
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        ? 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/30'
                         : aiResult.confidenceLevel === 'Medium'
-                        ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                        : 'bg-rose-50 text-rose-700 border border-rose-200'
+                        ? 'bg-amber-950/70 text-amber-300 border border-amber-500/30'
+                        : 'bg-rose-950/70 text-rose-300 border border-rose-500/30'
                     }`}
                   >
                     ● {Math.round(aiResult.confidence * 100)}% {aiResult.confidenceLevel} Confidence
@@ -608,13 +608,13 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                   <img
                     src={imagePreview}
                     alt="Scanned issue"
-                    className="w-full h-44 object-cover rounded-2xl shadow-sm border border-slate-200"
+                    className="w-full h-44 object-cover rounded-2xl shadow-md border border-cyan-500/30"
                   />
                   <span className="text-[11px] text-slate-400 mt-1 block">Input photograph</span>
                 </div>
 
-                <div className="md:col-span-8 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 space-y-3">
-                  <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                <div className="md:col-span-8 p-5 rounded-2xl bg-[#071A2F]/80 backdrop-blur-md border border-cyan-500/20 space-y-3">
+                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
                     Top Model Class Probabilities:
                   </h4>
 
@@ -623,16 +623,16 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                       {aiResult.topPredictions.map((pred) => (
                         <div key={pred.category}>
                           <div className="flex justify-between text-xs font-medium mb-1">
-                            <span className="text-slate-800 capitalize">
+                            <span className="text-white capitalize">
                               {pred.category.replace('_', ' ')}
                             </span>
-                            <span className="text-slate-600 font-semibold">
+                            <span className="text-[#00D6B8] font-bold">
                               {Math.round(pred.confidence * 100)}%
                             </span>
                           </div>
-                          <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                          <div className="w-full h-2 rounded-full bg-slate-800/80 border border-cyan-500/15 overflow-hidden">
                             <div
-                              className="h-full rounded-full bg-[#0F766E] transition-all duration-500"
+                              className="h-full rounded-full bg-gradient-to-r from-[#0F766E] to-[#00D6B8] transition-all duration-500"
                               style={{ width: `${Math.round(pred.confidence * 100)}%` }}
                             />
                           </div>
@@ -640,26 +640,26 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                       ))}
                     </div>
                   ) : (
-                    <div className="p-3 rounded-xl bg-amber-50 text-amber-800 text-xs">
+                    <div className="p-3 rounded-xl bg-amber-950/70 border border-amber-500/30 text-amber-300 text-xs">
                       <strong>AI MODEL NOTICE:</strong> Model inference returned baseline scores.
                     </div>
                   )}
 
-                  <p className="text-[11px] text-slate-500 pt-2 border-t border-slate-200/60">
+                  <p className="text-[11px] text-slate-300 pt-2 border-t border-cyan-500/20">
                     {aiResult?.explanation || 'Visual analysis complete.'}
                   </p>
                 </div>
               </div>
 
               {/* CATEGORY OVERRIDE SELECTOR (CITIZEN CONTROL) */}
-              <div className="p-4 rounded-2xl bg-teal-50/50 border border-teal-200/60">
-                <label className="block text-xs font-bold text-teal-900 mb-1">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#071A2F]/70 backdrop-blur-md border border-cyan-500/25">
+                <label className="block text-xs font-bold text-white mb-1.5">
                   Verify or Change Predicted Category:
                 </label>
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value as ComplaintCategory)}
-                  className="w-full p-2.5 rounded-xl border border-teal-300 bg-white text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full p-2.5 rounded-xl border border-cyan-500/30 bg-[#031223]/90 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 >
                   {CIVIC_CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
@@ -667,17 +667,17 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                     </option>
                   ))}
                 </select>
-                <span className="text-[11px] text-teal-700 mt-1 block">
+                <span className="text-[11px] text-slate-300 mt-1.5 block">
                   You can correct the AI category if the photograph differs.
                 </span>
               </div>
 
               {/* STEP CONTROLS */}
-              <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-between pt-4 border-t border-cyan-500/20">
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 flex items-center space-x-1.5"
+                  className="py-2.5 px-4 rounded-xl border border-cyan-500/25 bg-[#031223]/60 hover:bg-[#071A2F]/80 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Back to Image</span>
@@ -685,7 +685,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setCurrentStep(3)}
-                  className="py-2.5 px-6 rounded-xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-semibold flex items-center space-x-2 shadow-md shadow-teal-700/20"
+                  className="py-2.5 px-6 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-teal-500/25 transition-all cursor-pointer"
                 >
                   <span>Continue to Description</span>
                   <ArrowRight className="w-4 h-4" />
@@ -698,22 +698,22 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* STEP 3: DESCRIPTION & SPEECH-TO-TEXT */}
       {currentStep === 3 && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs space-y-6 animate-in fade-in duration-200">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-6 animate-in fade-in duration-200">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Describe the Problem</h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <h3 className="text-base font-bold text-white tracking-tight">Describe the Problem</h3>
+            <p className="text-xs text-slate-300 mt-1">
               Type or speak your grievance. Natural language will be evaluated with 30% weighting alongside image vision (70%).
             </p>
           </div>
 
           {/* SPEECH LANGUAGE SELECTOR & RECORDING CONTROLS */}
-          <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/60">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#071A2F]/75 backdrop-blur-md border border-cyan-500/20">
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-semibold text-slate-700">Speech Language:</span>
+              <span className="text-xs font-semibold text-slate-200">Speech Language:</span>
               <select
                 value={speechLanguage}
                 onChange={(e) => setSpeechLanguage(e.target.value)}
-                className="py-1 px-2.5 rounded-lg border border-slate-200 bg-white text-xs text-slate-800"
+                className="py-1.5 px-3 rounded-xl border border-cyan-500/30 bg-[#031223]/90 text-xs text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
               >
                 <option value="en-IN">English (India) – en-IN</option>
                 <option value="hi-IN">Hindi – hi-IN</option>
@@ -725,27 +725,27 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             <div className="flex items-center">
               {isListening ? (
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold animate-pulse">
-                    <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-ping inline-block" />
+                  <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-rose-950/70 border border-rose-500/40 text-rose-300 text-xs font-bold animate-pulse">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping inline-block" />
                     <span>🔴 Listening...</span>
                   </div>
 
-                  <span className="font-mono text-xs font-bold text-slate-800 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 shadow-2xs">
+                  <span className="font-mono text-xs font-bold text-white bg-[#031223]/80 px-2.5 py-1.5 rounded-lg border border-cyan-500/30 shadow-2xs">
                     {formatTimer(listeningTimer)}
                   </span>
 
                   {/* Real-time microphone activity animation */}
-                  <div className="flex items-center space-x-1 h-6 px-1.5 bg-white rounded-lg border border-slate-200" title="Microphone activity">
-                    <span className="w-1 bg-teal-600 rounded-full animate-bounce [animation-delay:-0.3s] h-3" />
-                    <span className="w-1 bg-teal-600 rounded-full animate-bounce [animation-delay:-0.15s] h-4.5" />
-                    <span className="w-1 bg-teal-600 rounded-full animate-bounce [animation-delay:-0.4s] h-2.5" />
-                    <span className="w-1 bg-teal-600 rounded-full animate-bounce [animation-delay:-0.05s] h-4" />
+                  <div className="flex items-center space-x-1 h-6 px-1.5 bg-[#031223]/80 rounded-lg border border-cyan-500/20" title="Microphone activity">
+                    <span className="w-1 bg-[#00D6B8] rounded-full animate-bounce [animation-delay:-0.3s] h-3" />
+                    <span className="w-1 bg-[#00D6B8] rounded-full animate-bounce [animation-delay:-0.15s] h-4.5" />
+                    <span className="w-1 bg-[#00D6B8] rounded-full animate-bounce [animation-delay:-0.4s] h-2.5" />
+                    <span className="w-1 bg-[#00D6B8] rounded-full animate-bounce [animation-delay:-0.05s] h-4" />
                   </div>
 
                   <button
                     type="button"
                     onClick={stopSpeaking}
-                    className="py-1.5 px-3.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white shadow-xs transition-colors flex items-center space-x-1.5"
+                    className="py-1.5 px-3.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white shadow-xs transition-colors flex items-center space-x-1.5 cursor-pointer"
                   >
                     <MicOff className="w-3.5 h-3.5" />
                     <span>Stop Speaking</span>
@@ -755,9 +755,9 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 <button
                   type="button"
                   onClick={startSpeaking}
-                  className="py-2 px-4 rounded-xl text-xs font-semibold bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 shadow-xs flex items-center space-x-2 transition-all hover:border-teal-500"
+                  className="py-2 px-4 rounded-xl text-xs font-semibold bg-[#031223]/70 hover:bg-[#071A2F] text-white border border-cyan-500/30 shadow-xs flex items-center space-x-2 transition-all hover:border-cyan-400 cursor-pointer"
                 >
-                  <Mic className="w-4 h-4 text-teal-700" />
+                  <Mic className="w-4 h-4 text-[#00D6B8]" />
                   <span>🎤 Start Speaking</span>
                 </button>
               )}
@@ -766,8 +766,8 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
           {/* MICROPHONE ERROR / PERMISSION DENIED BANNER */}
           {speechError && (
-            <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start space-x-2.5 animate-in fade-in duration-200">
-              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <div className="p-3.5 rounded-2xl bg-amber-950/70 border border-amber-500/30 text-amber-200 text-xs flex items-start space-x-2.5 animate-in fade-in duration-200">
+              <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <div className="flex-1 font-medium leading-relaxed">{speechError}</div>
             </div>
           )}
@@ -779,7 +779,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe the civic issue, location landmarks, severity, or hazards... (or click '🎤 Start Speaking')"
-              className="w-full p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 bg-white"
+              className="w-full p-4 rounded-2xl border border-cyan-500/30 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40 focus:border-cyan-400 bg-[#071A2F]/80 backdrop-blur-sm"
             />
             <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
               <span>Transcript is live and remains fully editable.</span>
@@ -787,7 +787,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setDescription('')}
-                  className="text-slate-400 hover:text-slate-600 underline"
+                  className="text-cyan-400 hover:text-cyan-300 underline cursor-pointer"
                 >
                   Clear text
                 </button>
@@ -796,11 +796,11 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
           </div>
 
           {/* STEP CONTROLS */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-between pt-4 border-t border-cyan-500/20">
             <button
               type="button"
               onClick={() => setCurrentStep(2)}
-              className="py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 flex items-center space-x-1.5"
+              className="py-2.5 px-4 rounded-xl border border-cyan-500/25 bg-[#031223]/60 hover:bg-[#071A2F]/80 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to AI</span>
@@ -811,8 +811,8 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
               onClick={evaluateMultimodal}
               className={`py-2.5 px-6 rounded-xl text-xs font-semibold flex items-center space-x-2 shadow-md ${
                 description.trim()
-                  ? 'bg-[#0F766E] hover:bg-[#115E59] text-white shadow-teal-700/20'
-                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white shadow-teal-500/25 cursor-pointer hover:scale-[1.02]'
+                  : 'bg-slate-900/60 text-slate-500 border border-slate-700/40 cursor-not-allowed'
               }`}
             >
               <span>Combine AI & Continue</span>
@@ -824,10 +824,10 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* STEP 4: LOCATION & DEMO WARD DETECTION */}
       {currentStep === 4 && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs space-y-6 animate-in fade-in duration-200">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-6 animate-in fade-in duration-200">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Complaint Location & Ward</h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <h3 className="text-base font-bold text-white tracking-tight">Complaint Location & Ward</h3>
+            <p className="text-xs text-slate-300 mt-1">
               CRITICAL: Wards are derived strictly from geographic location, NOT from image AI.
             </p>
           </div>
@@ -837,31 +837,31 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             <div
               className={`p-3.5 rounded-2xl text-xs flex items-start space-x-2.5 ${
                 isMultimodalAgreed
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200/80'
-                  : 'bg-amber-50 text-amber-800 border border-amber-200/80'
+                  ? 'bg-emerald-950/70 text-emerald-200 border border-emerald-500/30'
+                  : 'bg-amber-950/70 text-amber-200 border border-amber-500/30'
               }`}
             >
-              <Info className="w-4 h-4 shrink-0 mt-0.5" />
+              <Info className="w-4 h-4 shrink-0 mt-0.5 text-cyan-400" />
               <div className="flex-1">
-                <span className="font-semibold block mb-0.5">
+                <span className="font-semibold block mb-0.5 text-white">
                   {isMultimodalAgreed ? 'Multimodal Agreement Verified' : 'AI Result Requires Confirmation'}
                 </span>
-                <p className="text-[11px] leading-relaxed">{multimodalNotice}</p>
+                <p className="text-[11px] leading-relaxed text-slate-300">{multimodalNotice}</p>
               </div>
             </div>
           )}
 
           {/* LOCATION MODE SWITCHER (GPS vs DEMO WARDS) */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200/60">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-[#071A2F]/75 backdrop-blur-md border border-cyan-500/20">
             <div className="flex items-center space-x-2">
               <button
                 type="button"
                 onClick={handleUseCurrentGPS}
                 disabled={isLocating}
-                className={`py-2 px-3.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 shadow-xs transition-all ${
+                className={`py-2 px-3.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 shadow-xs transition-all cursor-pointer ${
                   locationMode === 'gps'
-                    ? 'bg-[#0F766E] text-white'
-                    : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
+                    ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] text-white shadow-teal-500/25'
+                    : 'bg-[#031223]/70 hover:bg-[#071A2F] text-slate-200 border border-cyan-500/20'
                 }`}
               >
                 <Navigation className="w-3.5 h-3.5" />
@@ -871,10 +871,10 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
               <button
                 type="button"
                 onClick={() => setLocationMode('demo')}
-                className={`py-2 px-3.5 rounded-xl text-xs font-semibold transition-all ${
+                className={`py-2 px-3.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   locationMode === 'demo'
-                    ? 'bg-[#0F766E] text-white shadow-xs'
-                    : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
+                    ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] text-white shadow-teal-500/25'
+                    : 'bg-[#031223]/70 hover:bg-[#071A2F] text-slate-200 border border-cyan-500/20'
                 }`}
               >
                 Select Demo Location
@@ -883,11 +883,11 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
             {/* DEMO WARD DROPDOWN */}
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-semibold text-slate-700 whitespace-nowrap">Demo Ward:</span>
+              <span className="text-xs font-semibold text-slate-200 whitespace-nowrap">Demo Ward:</span>
               <select
                 value={selectedWardNumber}
                 onChange={(e) => handleWardSelect(e.target.value)}
-                className="py-1.5 px-3 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-800"
+                className="py-1.5 px-3 rounded-xl border border-cyan-500/30 bg-[#031223]/90 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
               >
                 {DEMO_WARDS.map((w) => (
                   <option key={w.demoWardNumber} value={w.demoWardNumber}>
@@ -899,16 +899,16 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
           </div>
 
           {gpsError && (
-            <p className="text-[11px] text-amber-700 bg-amber-50 p-2.5 rounded-xl border border-amber-200">
+            <p className="text-[11px] text-amber-200 bg-amber-950/70 p-2.5 rounded-xl border border-amber-500/30">
               {gpsError}
             </p>
           )}
 
           {/* INTERACTIVE LOCATION MAP */}
           <div>
-            <div className="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+            <div className="flex items-center justify-between text-xs text-slate-400 mb-1.5">
               <span>Click or tap the map to adjust exact pin location:</span>
-              <span className="font-semibold text-teal-700">
+              <span className="font-semibold text-[#00D6B8]">
                 Lat: {locationDetails.latitude.toFixed(4)}, Lng: {locationDetails.longitude.toFixed(4)}
               </span>
             </div>
@@ -922,35 +922,35 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
           </div>
 
           {/* DETECTED LOCATION SUMMARY CARD */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#071A2F]/80 backdrop-blur-md border border-cyan-500/25 shadow-lg grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">City</span>
-              <span className="font-semibold text-slate-900">{locationDetails.city}</span>
+              <span className="font-semibold text-white">{locationDetails.city}</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Area</span>
-              <span className="font-semibold text-slate-900">{locationDetails.area}</span>
+              <span className="font-semibold text-white">{locationDetails.area}</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Admin Ward</span>
-              <span className="font-semibold text-slate-900">{locationDetails.administrativeWard}</span>
+              <span className="font-semibold text-white">{locationDetails.administrativeWard}</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Demo Ward</span>
-              <span className="font-bold text-[#0F766E]">{locationDetails.demoWardNumber}</span>
+              <span className="font-bold text-[#00D6B8]">{locationDetails.demoWardNumber}</span>
             </div>
-            <div className="col-span-2 sm:col-span-4 pt-2 border-t border-slate-100">
+            <div className="col-span-2 sm:col-span-4 pt-2.5 border-t border-cyan-500/20">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Resolved Address</span>
-              <span className="font-medium text-slate-800">{locationDetails.address}</span>
+              <span className="font-medium text-slate-200">{locationDetails.address}</span>
             </div>
           </div>
 
           {/* STEP CONTROLS */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-between pt-4 border-t border-cyan-500/20">
             <button
               type="button"
               onClick={() => setCurrentStep(3)}
-              className="py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 flex items-center space-x-1.5"
+              className="py-2.5 px-4 rounded-xl border border-cyan-500/25 bg-[#031223]/60 hover:bg-[#071A2F]/80 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to Description</span>
@@ -958,7 +958,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             <button
               type="button"
               onClick={() => setCurrentStep(5)}
-              className="py-2.5 px-6 rounded-xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-semibold flex items-center space-x-2 shadow-md shadow-teal-700/20"
+              className="py-2.5 px-6 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-teal-500/25 transition-all cursor-pointer"
             >
               <span>Review Complaint</span>
               <ArrowRight className="w-4 h-4" />
@@ -969,31 +969,31 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* STEP 5: REVIEW & SUBMIT */}
       {currentStep === 5 && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs space-y-6 animate-in fade-in duration-200">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-6 animate-in fade-in duration-200">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Complaint Review</h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <h3 className="text-base font-bold text-white tracking-tight">Complaint Review</h3>
+            <p className="text-xs text-slate-300 mt-1">
               Verify all AI evaluations, geocoded ward information, and automated department routing before final submission.
             </p>
           </div>
 
           {/* REVIEW DOSSIER CARD */}
-          <div className="p-6 rounded-3xl bg-slate-50/80 border border-slate-200/80 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-slate-200/60">
+          <div className="p-6 rounded-3xl bg-[#071A2F]/80 backdrop-blur-md border border-cyan-500/20 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-cyan-500/20">
               <div className="flex items-center space-x-4">
                 <img
                   src={imagePreview}
                   alt="Complaint thumbnail"
-                  className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shadow-sm shrink-0"
+                  className="w-20 h-20 rounded-2xl object-cover border border-cyan-500/30 shadow-md shrink-0"
                 />
                 <div>
-                  <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider">
+                  <span className="text-[11px] font-bold text-[#00D6B8] uppercase tracking-wider">
                     Problem Category
                   </span>
-                  <h4 className="text-base font-bold text-slate-900 capitalize">
+                  <h4 className="text-base font-bold text-white capitalize">
                     {getCategoryLabel(selectedCategory)}
                   </h4>
-                  <span className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-200/80">
+                  <span className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950/70 text-[#00D6B8] border border-cyan-500/30">
                     {Math.round(combinedConfidence * 100)}% Combined AI Confidence
                   </span>
                 </div>
@@ -1002,7 +1002,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
               <button
                 type="button"
                 onClick={() => setCurrentStep(2)}
-                className="text-xs font-semibold text-teal-700 hover:text-teal-800 underline self-start"
+                className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 underline self-start cursor-pointer"
               >
                 Change Category
               </button>
@@ -1013,18 +1013,18 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
                 Citizen Description
               </span>
-              <p className="text-xs text-slate-800 leading-relaxed bg-white p-3 rounded-xl border border-slate-200/60">
+              <p className="text-xs text-slate-200 leading-relaxed bg-[#031223]/80 p-3.5 rounded-xl border border-cyan-500/20">
                 {description}
               </p>
             </div>
 
             {/* LOCATION DETAILS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2 border-t border-slate-200/60">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2 border-t border-cyan-500/20">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
                   Location & Address
                 </span>
-                <p className="text-xs font-medium text-slate-800 mt-0.5">{locationDetails.address}</p>
+                <p className="text-xs font-medium text-white mt-0.5">{locationDetails.address}</p>
                 <span className="text-[10px] text-slate-400">
                   {locationDetails.city} • {locationDetails.area}
                 </span>
@@ -1034,7 +1034,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
                   Administrative Ward
                 </span>
-                <p className="text-xs font-bold text-teal-800 mt-0.5">
+                <p className="text-xs font-bold text-[#00D6B8] mt-0.5">
                   {locationDetails.demoWardNumber} (Dahisar {locationDetails.administrativeWard})
                 </p>
                 <span className="text-[10px] text-slate-400">{locationDetails.wardName}</span>
@@ -1042,18 +1042,18 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             </div>
 
             {/* AUTOMATIC DEPARTMENT ROUTING BOX */}
-            <div className="p-4 rounded-2xl bg-white border border-teal-200/80 shadow-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#031223]/85 backdrop-blur-md border border-cyan-500/25 shadow-lg">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider flex items-center space-x-1">
-                  <Building2 className="w-3.5 h-3.5 text-teal-700" />
+                <span className="text-[11px] font-bold text-[#00D6B8] uppercase tracking-wider flex items-center space-x-1">
+                  <Building2 className="w-3.5 h-3.5 text-[#00D6B8]" />
                   <span>Auto-Routed Department</span>
                 </span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-700">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950/80 text-[#00D6B8] border border-cyan-500/30">
                   {routingInfo.priority} Priority
                 </span>
               </div>
-              <p className="text-sm font-bold text-slate-900">{routingInfo.department.departmentName}</p>
-              <p className="text-xs text-slate-500 mt-0.5">{routingInfo.reason}</p>
+              <p className="text-sm font-bold text-white">{routingInfo.department.departmentName}</p>
+              <p className="text-xs text-slate-300 mt-0.5">{routingInfo.reason}</p>
               <span className="text-[10px] text-slate-400 mt-1 block">
                 Target Resolution SLA: {routingInfo.slaHours} hours
               </span>
@@ -1061,11 +1061,11 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
           </div>
 
           {/* STEP CONTROLS */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-between pt-4 border-t border-cyan-500/20">
             <button
               type="button"
               onClick={() => setCurrentStep(4)}
-              className="py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 flex items-center space-x-1.5"
+              className="py-2.5 px-4 rounded-xl border border-cyan-500/25 bg-[#031223]/60 hover:bg-[#071A2F]/80 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back / Edit Location</span>
@@ -1075,7 +1075,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
               type="button"
               disabled={isSubmitting}
               onClick={handleSubmitComplaint}
-              className="py-3 px-8 rounded-2xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-teal-700/25 transition-all hover:scale-[1.02]"
+              className="py-3 px-8 rounded-2xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-teal-500/25 transition-all hover:scale-[1.02] cursor-pointer"
             >
               {isSubmitting ? (
                 <>
@@ -1095,37 +1095,37 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
       {/* STEP 6: SUBMISSION SUCCESS SCREEN */}
       {currentStep === 6 && (
-        <div className="p-8 sm:p-12 rounded-3xl bg-white/90 backdrop-blur-2xl border border-white shadow-xl text-center space-y-6 animate-in zoom-in-95 duration-200">
-          <div className="w-16 h-16 rounded-3xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-sm ring-8 ring-emerald-50/50">
+        <div className="p-8 sm:p-12 rounded-3xl bg-[#031223]/85 backdrop-blur-2xl border border-cyan-500/25 shadow-2xl text-center space-y-6 animate-in zoom-in-95 duration-200">
+          <div className="w-16 h-16 rounded-3xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-md ring-8 ring-emerald-500/10">
             <CheckCircle2 className="w-9 h-9" />
           </div>
 
           <div>
-            <span className="text-xs font-bold text-teal-800 uppercase tracking-widest">
+            <span className="text-xs font-bold text-[#00D6B8] uppercase tracking-widest">
               Submission Successful
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1 tracking-tight">
               {submissionSuccessId}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mt-2 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto mt-2 leading-relaxed">
               Your grievance has been permanently logged in the Dahisar municipal register and routed to the {routingInfo.department.departmentName}.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 max-w-md mx-auto text-xs text-left space-y-1.5">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#071A2F]/80 border border-cyan-500/20 max-w-md mx-auto text-xs text-left space-y-2">
             <div className="flex justify-between">
-              <span className="text-slate-500">Ward:</span>
-              <span className="font-semibold text-slate-900">{locationDetails.demoWardNumber}</span>
+              <span className="text-slate-400">Ward:</span>
+              <span className="font-semibold text-white">{locationDetails.demoWardNumber}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500">Category:</span>
-              <span className="font-semibold text-slate-900 capitalize">
+              <span className="text-slate-400">Category:</span>
+              <span className="font-semibold text-white capitalize">
                 {selectedCategory.replace('_', ' ')}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500">Estimated SLA:</span>
-              <span className="font-semibold text-teal-800">{routingInfo.slaHours} Hours</span>
+              <span className="text-slate-400">Estimated SLA:</span>
+              <span className="font-semibold text-[#00D6B8]">{routingInfo.slaHours} Hours</span>
             </div>
           </div>
 
@@ -1133,14 +1133,14 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             <button
               type="button"
               onClick={() => onNavigate('complaint_detail', submissionSuccessId)}
-              className="py-3 px-6 rounded-2xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-semibold shadow-md transition-all hover:scale-[1.02]"
+              className="py-3 px-6 rounded-2xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold shadow-md shadow-teal-900/40 transition-all hover:scale-[1.02] cursor-pointer"
             >
               Track This Complaint
             </button>
             <button
               type="button"
               onClick={() => onNavigate('citizen_dashboard')}
-              className="py-3 px-6 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold border border-slate-200 shadow-xs"
+              className="py-3 px-6 rounded-2xl bg-[#031223]/70 hover:bg-[#071A2F] text-slate-200 border border-cyan-500/20 text-xs font-semibold shadow-xs transition-all cursor-pointer"
             >
               Return to Citizen Dashboard
             </button>

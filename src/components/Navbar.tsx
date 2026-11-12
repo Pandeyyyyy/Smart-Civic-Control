@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={
         isHomePage
           ? 'sticky top-3 sm:top-4 z-40 w-full px-3 sm:px-6 lg:px-8 transition-all'
-          : 'sticky top-0 z-40 w-full border-b border-white/60 bg-white/75 backdrop-blur-xl shadow-xs transition-all'
+          : 'sticky top-0 z-40 w-full border-b border-cyan-500/20 bg-[#031223]/80 backdrop-blur-xl shadow-lg shadow-black/40 transition-all'
       }
     >
       <div
@@ -93,11 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onToggleMobileMenu}
-              className={`md:hidden p-2 rounded-xl transition-colors ${
-                isHomePage
-                  ? 'text-slate-300 hover:text-white hover:bg-white/10'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
-              }`}
+              className="md:hidden p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -122,20 +118,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <LogoSymbol size={36} showAura />
             <div className="flex flex-col">
-              <span
-                className={`text-base sm:text-lg font-bold tracking-tight transition-colors leading-tight ${
-                  isHomePage
-                    ? 'text-white group-hover:text-cyan-300'
-                    : 'text-slate-900 group-hover:text-[#0F766E]'
-                }`}
-              >
+              <span className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors leading-tight">
                 Smart Civic Connect
               </span>
-              <span
-                className={`text-[10px] font-medium hidden sm:inline -mt-0.5 ${
-                  isHomePage ? 'text-[#00D6B8]' : 'text-teal-700'
-                }`}
-              >
+              <span className="text-[10px] font-medium text-[#00D6B8] hidden sm:inline -mt-0.5">
                 AI Urban Service Platform
               </span>
             </div>
@@ -143,12 +129,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* DESKTOP PUBLIC NAVIGATION LINKS (CENTER ON HOMEPAGE) */}
           {!isHomePage && (
-            <nav className="hidden lg:flex items-center space-x-1 pl-4 border-l border-slate-200/80 text-xs font-medium text-slate-600">
+            <nav className="hidden lg:flex items-center space-x-1 pl-4 border-l border-cyan-500/20 text-xs font-medium text-slate-300">
               <button
                 type="button"
                 onClick={() => handleNavClick('home')}
-                className={`px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors ${
-                  currentView === 'home' ? 'text-[#0F766E] font-semibold bg-teal-50/50' : ''
+                className={`px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/10 transition-colors ${
+                  currentView === 'home' ? 'text-[#00D6B8] font-semibold bg-cyan-950/60 border border-cyan-500/30' : ''
                 }`}
               >
                 Home
@@ -156,28 +142,28 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={() => handleNavClick('home', 'about')}
-                className="px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors"
+                className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/10 transition-colors"
               >
                 About
               </button>
               <button
                 type="button"
                 onClick={() => handleNavClick('home', 'how-it-works')}
-                className="px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors"
+                className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/10 transition-colors"
               >
                 How It Works
               </button>
               <button
                 type="button"
                 onClick={() => handleNavClick('home', 'categories')}
-                className="px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors"
+                className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/10 transition-colors"
               >
                 Categories
               </button>
               <button
                 type="button"
                 onClick={() => handleNavClick('home', 'contact')}
-                className="px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors"
+                className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/10 transition-colors"
               >
                 Contact
               </button>
@@ -242,18 +228,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search grievance or ward..."
-                  className={`w-36 sm:w-56 pl-3 pr-7 py-1.5 rounded-full text-xs focus:outline-none transition-all shadow-md ${
-                    isHomePage
-                      ? 'border border-cyan-500/30 bg-[#071A2F]/90 text-white placeholder-slate-400 focus:ring-1 focus:ring-cyan-400'
-                      : 'border border-slate-200 bg-white text-slate-800 focus:ring-1 focus:ring-teal-500 shadow-xs'
-                  }`}
+                  className="w-36 sm:w-56 pl-3 pr-7 py-1.5 rounded-full text-xs focus:outline-none transition-all shadow-md border border-cyan-500/30 bg-[#071A2F]/90 text-white placeholder-slate-400 focus:ring-1 focus:ring-cyan-400"
                 />
                 <button
                   type="button"
                   onClick={() => setShowSearchBar(false)}
-                  className={`absolute right-2.5 ${
-                    isHomePage ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-600'
-                  }`}
+                  className="absolute right-2.5 text-slate-400 hover:text-white"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -262,11 +242,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={() => setShowSearchBar(true)}
-                className={`p-2 rounded-full transition-colors ${
-                  isHomePage
-                    ? 'text-slate-300 hover:text-white hover:bg-white/10'
-                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/70 rounded-xl'
-                }`}
+                className="p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
                 title="Search"
               >
                 <Search className="w-4 h-4" />
@@ -275,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* DEMO MODE INDICATOR */}
-          <DemoBanner isDark={isHomePage} />
+          <DemoBanner isDark={true} />
 
           {/* AUTHENTICATION STATE: LOGGED IN vs. GUEST */}
           {currentUser ? (
@@ -285,20 +261,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowNotifPanel(!showNotifPanel)}
-                  className={`relative p-2 rounded-full border transition-all ${
-                    isHomePage
-                      ? 'text-slate-300 hover:text-white hover:bg-white/10 border-transparent hover:border-cyan-500/30'
-                      : 'rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/80 border-transparent hover:border-slate-200/60'
-                  }`}
+                  className="relative p-2 rounded-full border border-transparent hover:border-cyan-500/30 text-slate-300 hover:text-white hover:bg-white/10 transition-all"
                   aria-label="Notifications"
                 >
                   <Bell className="w-4 h-4" />
                   {unreadCount > 0 && (
-                    <span
-                      className={`absolute top-1 right-1 w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center shadow-xs ${
-                        isHomePage ? 'bg-[#00D6B8] text-slate-950' : 'bg-[#0F766E] text-white'
-                      }`}
-                    >
+                    <span className="absolute top-1 right-1 w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center shadow-xs bg-[#00D6B8] text-slate-950">
                       {unreadCount}
                     </span>
                   )}
@@ -306,30 +274,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 {/* NOTIFICATIONS PANEL POPOVER */}
                 {showNotifPanel && (
-                  <div
-                    className={`absolute right-0 top-full mt-2 w-80 sm:w-96 p-4 rounded-2xl backdrop-blur-2xl border shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 ${
-                      isHomePage
-                        ? 'bg-[#031223]/95 border-cyan-500/30 text-white shadow-black/70'
-                        : 'bg-white/95 border-white shadow-xl text-slate-800'
-                    }`}
-                  >
-                    <div
-                      className={`flex items-center justify-between pb-3 border-b ${
-                        isHomePage ? 'border-cyan-500/20' : 'border-slate-100'
-                      }`}
-                    >
+                  <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 p-4 rounded-2xl backdrop-blur-2xl border border-cyan-500/30 bg-[#031223]/95 shadow-2xl shadow-black/70 z-50 animate-in fade-in zoom-in-95 duration-150 text-white">
+                    <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20">
                       <div className="flex items-center space-x-2">
-                        <h4 className={`text-sm font-bold ${isHomePage ? 'text-white' : 'text-slate-900'}`}>
+                        <h4 className="text-sm font-bold text-white">
                           Notifications
                         </h4>
                         {unreadCount > 0 && (
-                          <span
-                            className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                              isHomePage
-                                ? 'bg-cyan-950/80 text-[#00D6B8] border border-cyan-500/30'
-                                : 'bg-teal-50 text-teal-700'
-                            }`}
-                          >
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-950/80 text-[#00D6B8] border border-cyan-500/30">
                             {unreadCount} new
                           </span>
                         )}
@@ -338,9 +290,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <button
                           type="button"
                           onClick={() => onMarkAllNotificationsRead()}
-                          className={`text-[11px] font-medium flex items-center space-x-1 ${
-                            isHomePage ? 'text-[#00D6B8] hover:text-cyan-300' : 'text-teal-700 hover:text-teal-800'
-                          }`}
+                          className="text-[11px] font-medium flex items-center space-x-1 text-[#00D6B8] hover:text-cyan-300"
                         >
                           <Check className="w-3 h-3" />
                           <span>Mark all read</span>
@@ -348,13 +298,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                       )}
                     </div>
 
-                    <div
-                      className={`divide-y max-h-80 overflow-y-auto mt-2 ${
-                        isHomePage ? 'divide-cyan-500/15' : 'divide-slate-100'
-                      }`}
-                    >
+                    <div className="divide-y divide-cyan-500/15 max-h-80 overflow-y-auto mt-2">
                       {notifications.length === 0 ? (
-                        <p className={`text-xs py-6 text-center ${isHomePage ? 'text-slate-400' : 'text-slate-400'}`}>
+                        <p className="text-xs py-6 text-center text-slate-400">
                           No notifications yet.
                         </p>
                       ) : (
@@ -369,43 +315,23 @@ export const Navbar: React.FC<NavbarProps> = ({
                               }
                             }}
                             className={`p-2.5 rounded-xl transition-colors cursor-pointer ${
-                              isHomePage
-                                ? !n.isRead
-                                  ? 'bg-cyan-950/40 hover:bg-cyan-900/40'
-                                  : 'hover:bg-white/5'
-                                : !n.isRead
-                                ? 'bg-teal-50/40 hover:bg-slate-50'
-                                : 'hover:bg-slate-50'
+                              !n.isRead
+                                ? 'bg-cyan-950/40 hover:bg-cyan-900/40'
+                                : 'hover:bg-white/5'
                             }`}
                           >
                             <div className="flex items-start justify-between">
-                              <span
-                                className={`text-xs font-semibold ${
-                                  isHomePage ? 'text-white' : 'text-slate-900'
-                                }`}
-                              >
+                              <span className="text-xs font-semibold text-white">
                                 {n.title}
                               </span>
                               {!n.isRead && (
-                                <span
-                                  className={`w-2 h-2 rounded-full mt-1 shrink-0 ${
-                                    isHomePage ? 'bg-[#00D6B8]' : 'bg-[#0F766E]'
-                                  }`}
-                                />
+                                <span className="w-2 h-2 rounded-full mt-1 shrink-0 bg-[#00D6B8]" />
                               )}
                             </div>
-                            <p
-                              className={`text-xs mt-0.5 line-clamp-2 ${
-                                isHomePage ? 'text-slate-300' : 'text-slate-600'
-                              }`}
-                            >
+                            <p className="text-xs mt-0.5 line-clamp-2 text-slate-300">
                               {n.message}
                             </p>
-                            <span
-                              className={`text-[10px] mt-1 block ${
-                                isHomePage ? 'text-slate-400' : 'text-slate-400'
-                              }`}
-                            >
+                            <span className="text-[10px] mt-1 block text-slate-400">
                               {new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </span>
                           </div>
@@ -421,11 +347,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowUserDropdown(!showUserDropdown)}
-                  className={`flex items-center space-x-2 p-1.5 rounded-full border transition-all ${
-                    isHomePage
-                      ? 'hover:bg-white/10 border-transparent hover:border-cyan-500/30'
-                      : 'rounded-xl hover:bg-white/80 border-transparent hover:border-slate-200/60'
-                  }`}
+                  className="flex items-center space-x-2 p-1.5 rounded-full border border-transparent hover:border-cyan-500/30 hover:bg-white/10 transition-all"
                 >
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-xs ${
@@ -435,54 +357,26 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {currentUser.name.charAt(0)}
                   </div>
                   <div className="hidden lg:flex flex-col text-left">
-                    <span
-                      className={`text-xs font-semibold leading-tight ${
-                        isHomePage ? 'text-white' : 'text-slate-900'
-                      }`}
-                    >
+                    <span className="text-xs font-semibold leading-tight text-white">
                       {currentUser.name}
                     </span>
-                    <span
-                      className={`text-[10px] capitalize ${
-                        isHomePage ? 'text-cyan-400' : 'text-slate-500'
-                      }`}
-                    >
+                    <span className="text-[10px] capitalize text-cyan-400">
                       {currentUser.role === 'admin' ? 'Municipal Administrator' : 'Verified Citizen'}
                     </span>
                   </div>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 hidden lg:inline ${
-                      isHomePage ? 'text-slate-300' : 'text-slate-400'
-                    }`}
-                  />
+                  <ChevronDown className="w-3.5 h-3.5 hidden lg:inline text-slate-300" />
                 </button>
 
                 {showUserDropdown && (
-                  <div
-                    className={`absolute right-0 top-full mt-2 w-64 p-3 rounded-2xl backdrop-blur-2xl border shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 ${
-                      isHomePage
-                        ? 'bg-[#031223]/95 border-cyan-500/30 text-white shadow-black/70'
-                        : 'bg-white/95 border-white shadow-xl text-slate-800'
-                    }`}
-                  >
-                    <div
-                      className={`pb-2.5 mb-2 border-b ${
-                        isHomePage ? 'border-cyan-500/20' : 'border-slate-100'
-                      }`}
-                    >
-                      <p className={`text-xs font-bold ${isHomePage ? 'text-white' : 'text-slate-900'}`}>
+                  <div className="absolute right-0 top-full mt-2 w-64 p-3 rounded-2xl backdrop-blur-2xl border border-cyan-500/30 bg-[#031223]/95 text-white shadow-2xl shadow-black/70 z-50 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="pb-2.5 mb-2 border-b border-cyan-500/20">
+                      <p className="text-xs font-bold text-white">
                         {currentUser.name}
                       </p>
-                      <p className={`text-[11px] ${isHomePage ? 'text-slate-300' : 'text-slate-500'}`}>
+                      <p className="text-[11px] text-slate-300">
                         {currentUser.email}
                       </p>
-                      <span
-                        className={`inline-block mt-1 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider ${
-                          isHomePage
-                            ? 'bg-cyan-950/80 text-[#00D6B8] border border-cyan-500/30'
-                            : 'bg-teal-50 text-teal-800'
-                        }`}
-                      >
+                      <span className="inline-block mt-1 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-cyan-950/80 text-[#00D6B8] border border-cyan-500/30">
                         {currentUser.role}
                       </span>
                     </div>
@@ -494,11 +388,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                           onNavigate(currentUser.role === 'admin' ? 'admin_dashboard' : 'citizen_dashboard');
                           setShowUserDropdown(false);
                         }}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center space-x-2 transition-colors ${
-                          isHomePage ? 'text-slate-200 hover:bg-white/10' : 'text-slate-700 hover:bg-slate-50'
-                        }`}
+                        className="w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center space-x-2 text-slate-200 hover:bg-white/10 transition-colors"
                       >
-                        <LayoutDashboard className={`w-3.5 h-3.5 ${isHomePage ? 'text-[#00D6B8]' : 'text-teal-700'}`} />
+                        <LayoutDashboard className="w-3.5 h-3.5 text-[#00D6B8]" />
                         <span>Go to Dashboard</span>
                       </button>
 
@@ -509,11 +401,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                             onNavigate('report_problem');
                             setShowUserDropdown(false);
                           }}
-                          className={`w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center space-x-2 transition-colors ${
-                            isHomePage ? 'text-slate-200 hover:bg-white/10' : 'text-slate-700 hover:bg-slate-50'
-                          }`}
+                          className="w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center space-x-2 text-slate-200 hover:bg-white/10 transition-colors"
                         >
-                          <PlusCircle className={`w-3.5 h-3.5 ${isHomePage ? 'text-[#00D6B8]' : 'text-teal-700'}`} />
+                          <PlusCircle className="w-3.5 h-3.5 text-[#00D6B8]" />
                           <span>Report a Problem</span>
                         </button>
                       )}
@@ -524,15 +414,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                           onNavigate('profile');
                           setShowUserDropdown(false);
                         }}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center space-x-2 transition-colors ${
-                          isHomePage ? 'text-slate-200 hover:bg-white/10' : 'text-slate-700 hover:bg-slate-50'
-                        }`}
+                        className="w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center space-x-2 text-slate-200 hover:bg-white/10 transition-colors"
                       >
-                        <UserIcon className={`w-3.5 h-3.5 ${isHomePage ? 'text-slate-400' : 'text-slate-500'}`} />
+                        <UserIcon className="w-3.5 h-3.5 text-slate-400" />
                         <span>My Profile</span>
                       </button>
 
-                      <div className={`pt-1.5 mt-1 border-t ${isHomePage ? 'border-cyan-500/20' : 'border-slate-100'}`}>
+                      <div className="pt-1.5 mt-1 border-t border-cyan-500/20">
                         <button
                           type="button"
                           onClick={() => {
@@ -556,22 +444,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('login')}
-                className={`py-1.5 px-3 sm:px-4 rounded-full text-xs font-semibold transition-all ${
-                  isHomePage
-                    ? 'text-slate-200 hover:text-white hover:bg-white/10 border border-cyan-500/20'
-                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100/70'
-                }`}
+                className="py-1.5 px-3 sm:px-4 rounded-full text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 border border-cyan-500/20 transition-all"
               >
                 Sign In
               </button>
               <button
                 type="button"
                 onClick={() => onNavigate('register')}
-                className={`py-1.5 px-3.5 sm:px-4 rounded-full text-xs font-semibold shadow-md transition-all hover:scale-[1.02] ${
-                  isHomePage
-                    ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white shadow-cyan-950/40'
-                    : 'bg-[#0F766E] hover:bg-[#115E59] text-white'
-                }`}
+                className="py-1.5 px-3.5 sm:px-4 rounded-full text-xs font-semibold shadow-md bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white shadow-cyan-950/40 transition-all hover:scale-[1.02]"
               >
                 Register
               </button>

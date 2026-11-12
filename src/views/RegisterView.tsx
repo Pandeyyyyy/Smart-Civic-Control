@@ -84,15 +84,6 @@ export const RegisterView: React.FC<RegisterViewProps> = ({
 
   return (
     <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 overflow-hidden">
-      {/* BACKGROUND IMAGE: MODERN SUSTAINABLE CITY + NATURE */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-20 scale-105 transition-transform duration-1000"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1477959858617-67f30bc75b82?auto=format&fit=crop&w=2000&q=80')`,
-        }}
-      />
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs -z-10" />
-
       {/* GLASS REGISTER CARD */}
       <div className="w-full max-w-md p-6 sm:p-8 rounded-3xl bg-white/85 backdrop-blur-2xl border border-white/60 shadow-2xl animate-in fade-in zoom-in-95 duration-300">
         <div className="text-center mb-6">
