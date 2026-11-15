@@ -35,6 +35,11 @@ export interface PredictionScore {
 }
 
 export interface AIAnalysisResult {
+  validProblem: boolean;
+  hasLocationContext: boolean;
+  validationError?: string;
+  userMessage?: string;
+  shortDescription?: string;
   predictedCategory: ComplaintCategory;
   confidence: number; // 0 to 1
   confidenceLevel: 'High' | 'Medium' | 'Low';

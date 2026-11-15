@@ -114,17 +114,21 @@ export function combineMultimodalPredictions(
   requiresUserConfirmation: boolean;
   explanation: string;
 } {
-  if (!imageResult && !textResult) {
+  // Only consider image result if it successfully passed civic problem & location validation
+  const isImageValid = Boolean(imageResult && imageResult.validProblem && imageResult.hasLocationContext);
+  const activeImage = isImageValid ? imageResult : null;
+
+  if (!activeImage && !textResult) {
     return {
       finalCategory: 'others',
       finalConfidence: 0.3,
       confidenceLevel: 'Low',
       requiresUserConfirmation: true,
-      explanation: 'No image or text data provided for AI evaluation.',
+      explanation: 'No valid image or text data provided for AI evaluation.',
     };
   }
 
-  if (!imageResult && textResult) {
+  if (!activeImage && textResult) {
     const level = textResult.confidence >= 0.8 ? 'High' : textResult.confidence >= 0.5 ? 'Medium' : 'Low';
     return {
       finalCategory: textResult.predictedCategory,
@@ -135,18 +139,18 @@ export function combineMultimodalPredictions(
     };
   }
 
-  if (imageResult && !textResult) {
+  if (activeImage && !textResult) {
     return {
-      finalCategory: imageResult.predictedCategory,
-      finalConfidence: imageResult.confidence,
-      confidenceLevel: imageResult.confidenceLevel,
-      requiresUserConfirmation: imageResult.confidenceLevel === 'Low',
-      explanation: `Prediction derived from visual model inference (${Math.round(imageResult.confidence * 100)}% confidence).`,
+      finalCategory: activeImage.predictedCategory,
+      finalConfidence: activeImage.confidence,
+      confidenceLevel: activeImage.confidenceLevel,
+      requiresUserConfirmation: activeImage.confidenceLevel === 'Low',
+      explanation: `Prediction derived from visual model inference (${Math.round(activeImage.confidence * 100)}% confidence).`,
     };
   }
 
-  // Both image and text exist
-  const imgCat = imageResult!.predictedCategory;
+  // Both valid image and text exist
+  const imgCat = activeImage!.predictedCategory;
   const txtCat = textResult!.predictedCategory;
 
   const isAgreement = imgCat === txtCat;
@@ -160,14 +164,13 @@ export function combineMultimodalPredictions(
     // Both modalities agree!
     combinedConfidence = Math.min(
       0.99,
-      Number((imageResult!.confidence * IMAGE_WEIGHT + textResult!.confidence * TEXT_WEIGHT + 0.03).toFixed(2))
+      Number((activeImage!.confidence * IMAGE_WEIGHT + textResult!.confidence * TEXT_WEIGHT + 0.03).toFixed(2))
     );
     finalCat = imgCat;
-    explanation = `High multimodal agreement: Both image analysis (${Math.round(imageResult!.confidence * 100)}%) and text description (${Math.round(textResult!.confidence * 100)}%) identify this issue.`;
+    explanation = `High multimodal agreement: Both image analysis (${Math.round(activeImage!.confidence * 100)}%) and text description (${Math.round(textResult!.confidence * 100)}%) identify this issue.`;
   } else {
     // Modal disagreement
-    // Compare weighted scores
-    const imgScore = imageResult!.confidence * IMAGE_WEIGHT;
+    const imgScore = activeImage!.confidence * IMAGE_WEIGHT;
     const txtScore = textResult!.confidence * TEXT_WEIGHT;
 
     if (imgScore >= txtScore) {
@@ -179,7 +182,7 @@ export function combineMultimodalPredictions(
     }
 
     requiresUserConfirmation = true;
-    explanation = `AI RESULT REQUIRES USER CONFIRMATION: Visual model predicted '${imgCat.replace('_', ' ')}' (${Math.round(imageResult!.confidence * 100)}%), while text description suggests '${txtCat.replace('_', ' ')}' (${Math.round(textResult!.confidence * 100)}%). Please verify the category.`;
+    explanation = `AI RESULT REQUIRES USER CONFIRMATION: Visual model predicted '${imgCat.replace('_', ' ')}' (${Math.round(activeImage!.confidence * 100)}%), while text description suggests '${txtCat.replace('_', ' ')}' (${Math.round(textResult!.confidence * 100)}%). Please verify the category.`;
   }
 
   const confidenceLevel = combinedConfidence >= 0.8 ? 'High' : combinedConfidence >= 0.5 ? 'Medium' : 'Low';
@@ -226,25 +229,53 @@ export async function analyzeImageWithBackend(
       }),
     });
 
+    const data = await response.json().catch(() => ({}));
+
     if (!response.ok) {
-      const errJson = await response.json().catch(() => ({}));
-      throw new Error(errJson.error || 'Server AI analysis returned error');
+      return {
+        validProblem: false,
+        hasLocationContext: false,
+        validationError: data.validationError || data.error || 'AI Analysis service returned an error.',
+        predictedCategory: 'others',
+        confidence: 0,
+        confidenceLevel: 'Low',
+        topPredictions: [],
+        isModelInstalled: Boolean(data.isModelInstalled),
+        modelVersion: data.modelVersion || 'Gemini-Flash-CivicVision-v1.0',
+        analysisSource: 'gemini_multimodal',
+        explanation: data.explanation || data.error || 'Server error during image analysis.',
+      };
     }
 
-    const data: AIAnalysisResult = await response.json();
-    return data;
-  } catch (err: any) {
-    console.warn('Real server inference fallback or network error:', err);
-    // If backend is not reached or model unavailable, return clean uninstalled flag
     return {
+      validProblem: Boolean(data.validProblem),
+      hasLocationContext: Boolean(data.hasLocationContext),
+      validationError: data.validationError,
+      userMessage: data.userMessage,
+      shortDescription: data.shortDescription,
+      predictedCategory: data.predictedCategory || 'others',
+      confidence: typeof data.confidence === 'number' ? data.confidence : 0,
+      confidenceLevel: data.confidenceLevel || 'Low',
+      topPredictions: Array.isArray(data.topPredictions) ? data.topPredictions : [],
+      isModelInstalled: Boolean(data.isModelInstalled),
+      modelVersion: data.modelVersion || 'Gemini-Flash-CivicVision-v1.0',
+      analysisSource: data.analysisSource || 'gemini_multimodal',
+      explanation: data.explanation || '',
+    };
+  } catch (err: any) {
+    console.warn('Real server inference error:', err);
+    return {
+      validProblem: false,
+      hasLocationContext: false,
+      validationError: 'Network error: Failed to reach AI analysis service. Please try again.',
       predictedCategory: 'others',
       confidence: 0,
       confidenceLevel: 'Low',
       topPredictions: [],
       isModelInstalled: false,
-      modelVersion: 'MobileNetV2-CivicClassifier-v1.0',
-      analysisSource: 'rule_fallback',
-      explanation: 'AI MODEL NOT INSTALLED or unavailable. Please select problem category manually.',
+      modelVersion: 'Gemini-Flash-CivicVision-v1.0',
+      analysisSource: 'gemini_multimodal',
+      explanation: 'Network or connectivity error while reaching server AI endpoint.',
     };
   }
 }

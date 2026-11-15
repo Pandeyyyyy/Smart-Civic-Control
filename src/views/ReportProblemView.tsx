@@ -139,6 +139,9 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
     // Simulated high-fidelity AI prediction for the preset
     const result: AIAnalysisResult = {
+      validProblem: true,
+      hasLocationContext: true,
+      shortDescription: `Verified sample photo of ${preset.label} with visible public street surroundings.`,
       predictedCategory: preset.category,
       confidence: 0.94,
       confidenceLevel: 'High',
@@ -148,7 +151,7 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
         { category: 'road_damage', confidence: 0.02 },
       ],
       isModelInstalled: true,
-      modelVersion: 'MobileNetV2-Civic-TransferLearning-v2.1',
+      modelVersion: 'Gemini-Flash-CivicVision-v1.0',
       analysisSource: 'gemini_multimodal',
       explanation: `Verified visual characteristics matching ${getCategoryLabel(preset.category)}.`,
     };
@@ -157,6 +160,8 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
     setCombinedConfidence(0.94);
     setIsMultimodalAgreed(true);
     setMultimodalNotice('');
+    // Advance to AI scan result step so the user can review and continue
+    setCurrentStep(2);
   };
 
   // Image Upload Handler
@@ -198,7 +203,12 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
     try {
       const result = await analyzeImageWithBackend(imgData, filename);
       setAiResult(result);
-      if (result.predictedCategory) {
+      if (
+        result.validProblem &&
+        result.hasLocationContext &&
+        result.predictedCategory &&
+        result.predictedCategory !== 'others'
+      ) {
         setSelectedCategory(result.predictedCategory);
       }
     } catch (err) {
@@ -206,6 +216,26 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
     } finally {
       setIsScanning(false);
     }
+  };
+
+  // Reset uploaded image and return to Step 1
+  const handleResetImage = () => {
+    setImagePreview('');
+    setImageFile(null);
+    setImageFileName('');
+    setAiResult(null);
+    setCurrentStep(1);
+  };
+
+  // Advance to Step 3, pre-filling description if empty
+  const handleContinueToDescription = () => {
+    if (!aiResult?.validProblem || !aiResult?.hasLocationContext) {
+      return;
+    }
+    if (!description.trim() && aiResult.shortDescription) {
+      setDescription(aiResult.shortDescription);
+    }
+    setCurrentStep(3);
   };
 
   // Format recording timer: 00:05
@@ -380,6 +410,12 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
 
   // Submit Complaint
   const handleSubmitComplaint = () => {
+    if (aiResult && (!aiResult.validProblem || !aiResult.hasLocationContext)) {
+      alert('Cannot submit complaint: Uploaded photograph failed municipal validation.');
+      setCurrentStep(2);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -575,117 +611,204 @@ export const ReportProblemView: React.FC<ReportProblemViewProps> = ({
             </div>
           ) : (
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="flex items-center space-x-2 text-xs font-bold text-[#00D6B8] uppercase tracking-wider">
-                    <Sparkles className="w-4 h-4" />
-                    <span>AI ANALYSIS RESULT</span>
+              {/* ── VALIDATION FAILURE: Invalid image (not a civic problem) ── */}
+              {aiResult && !aiResult.validProblem && (
+                <div className="p-5 rounded-2xl bg-rose-950/70 border border-rose-500/30 flex flex-col sm:flex-row sm:items-start gap-4 animate-in fade-in duration-200">
+                  <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-rose-900/60 border border-rose-500/40">
+                    <AlertCircle className="w-5 h-5 text-rose-400" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mt-0.5">
-                    Category: {getCategoryLabel(selectedCategory)}
-                  </h3>
-                </div>
-
-                {/* CONFIDENCE BADGE */}
-                {aiResult && (
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold ${
-                      aiResult.confidenceLevel === 'High'
-                        ? 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/30'
-                        : aiResult.confidenceLevel === 'Medium'
-                        ? 'bg-amber-950/70 text-amber-300 border border-amber-500/30'
-                        : 'bg-rose-950/70 text-rose-300 border border-rose-500/30'
-                    }`}
-                  >
-                    ● {Math.round(aiResult.confidence * 100)}% {aiResult.confidenceLevel} Confidence
-                  </span>
-                )}
-              </div>
-
-              {/* IMAGE + TOP PREDICTIONS BREAKDOWN */}
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                <div className="md:col-span-4 text-center">
-                  <img
-                    src={imagePreview}
-                    alt="Scanned issue"
-                    className="w-full h-44 object-cover rounded-2xl shadow-md border border-cyan-500/30"
-                  />
-                  <span className="text-[11px] text-slate-400 mt-1 block">Input photograph</span>
-                </div>
-
-                <div className="md:col-span-8 p-5 rounded-2xl bg-[#071A2F]/80 backdrop-blur-md border border-cyan-500/20 space-y-3">
-                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                    Top Model Class Probabilities:
-                  </h4>
-
-                  {aiResult?.topPredictions && aiResult.topPredictions.length > 0 ? (
-                    <div className="space-y-2">
-                      {aiResult.topPredictions.map((pred) => (
-                        <div key={pred.category}>
-                          <div className="flex justify-between text-xs font-medium mb-1">
-                            <span className="text-white capitalize">
-                              {pred.category.replace('_', ' ')}
-                            </span>
-                            <span className="text-[#00D6B8] font-bold">
-                              {Math.round(pred.confidence * 100)}%
-                            </span>
-                          </div>
-                          <div className="w-full h-2 rounded-full bg-slate-800/80 border border-cyan-500/15 overflow-hidden">
-                            <div
-                              className="h-full rounded-full bg-gradient-to-r from-[#0F766E] to-[#00D6B8] transition-all duration-500"
-                              style={{ width: `${Math.round(pred.confidence * 100)}%` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
+                  <div className="flex-1">
+                    <h4 className="text-sm font-bold text-rose-300 mb-1">Image Validation Failed</h4>
+                    <p className="text-xs text-rose-200 leading-relaxed">
+                      {aiResult.validationError || 'Invalid image. Please upload a photo showing a civic problem.'}
+                    </p>
+                    <div className="flex items-center gap-3 mt-3">
+                      <img
+                        src={imagePreview}
+                        alt="Rejected"
+                        className="w-14 h-14 object-cover rounded-xl border border-rose-500/40 opacity-60"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleResetImage}
+                        className="py-2 px-4 rounded-xl bg-rose-900/60 hover:bg-rose-800/70 border border-rose-500/40 text-rose-200 text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span>Upload Another Image</span>
+                      </button>
                     </div>
-                  ) : (
-                    <div className="p-3 rounded-xl bg-amber-950/70 border border-amber-500/30 text-amber-300 text-xs">
-                      <strong>AI MODEL NOTICE:</strong> Model inference returned baseline scores.
+                  </div>
+                </div>
+              )}
+
+              {/* ── VALIDATION FAILURE: Civic issue visible but no location context ── */}
+              {aiResult && aiResult.validProblem && !aiResult.hasLocationContext && (
+                <div className="p-5 rounded-2xl bg-amber-950/70 border border-amber-500/30 flex flex-col sm:flex-row sm:items-start gap-4 animate-in fade-in duration-200">
+                  <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-amber-900/60 border border-amber-500/40">
+                    <AlertTriangle className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-bold text-amber-300 mb-1">Location Context Missing</h4>
+                    <p className="text-xs text-amber-200 leading-relaxed">
+                      {aiResult.validationError || "Image doesn't contain location. Please upload a photo showing the problem and its surroundings."}
+                    </p>
+                    <div className="flex items-center gap-3 mt-3">
+                      <img
+                        src={imagePreview}
+                        alt="Missing context"
+                        className="w-14 h-14 object-cover rounded-xl border border-amber-500/40 opacity-70"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleResetImage}
+                        className="py-2 px-4 rounded-xl bg-amber-900/60 hover:bg-amber-800/70 border border-amber-500/40 text-amber-200 text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span>Upload Another Image</span>
+                      </button>
+                    </div>
+                    <p className="text-[11px] text-amber-300/70 mt-2">
+                      Tip: Take a wider photo that shows the surrounding street, pavement or public area.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* ── VALIDATION SUCCESS: Render predictions panel ── */}
+              {aiResult && aiResult.validProblem && aiResult.hasLocationContext && (
+                <>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center space-x-2 text-xs font-bold text-[#00D6B8] uppercase tracking-wider">
+                        <Sparkles className="w-4 h-4" />
+                        <span>AI ANALYSIS RESULT</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white mt-0.5">
+                        Category: {getCategoryLabel(selectedCategory)}
+                      </h3>
+                    </div>
+
+                    {/* CONFIDENCE BADGE */}
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-bold ${
+                        aiResult.confidenceLevel === 'High'
+                          ? 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/30'
+                          : aiResult.confidenceLevel === 'Medium'
+                          ? 'bg-amber-950/70 text-amber-300 border border-amber-500/30'
+                          : 'bg-rose-950/70 text-rose-300 border border-rose-500/30'
+                      }`}
+                    >
+                      ● {Math.round(aiResult.confidence * 100)}% {aiResult.confidenceLevel} Confidence
+                    </span>
+                  </div>
+
+                  {/* IMAGE + TOP PREDICTIONS BREAKDOWN */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <div className="md:col-span-4 text-center">
+                      <img
+                        src={imagePreview}
+                        alt="Scanned issue"
+                        className="w-full h-44 object-cover rounded-2xl shadow-md border border-cyan-500/30"
+                      />
+                      <span className="text-[11px] text-slate-400 mt-1 block">Input photograph</span>
+                    </div>
+
+                    <div className="md:col-span-8 p-5 rounded-2xl bg-[#071A2F]/80 backdrop-blur-md border border-cyan-500/20 space-y-3">
+                      <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                        Top Model Class Probabilities:
+                      </h4>
+
+                      {aiResult.topPredictions && aiResult.topPredictions.length > 0 ? (
+                        <div className="space-y-2">
+                          {aiResult.topPredictions.map((pred) => (
+                            <div key={pred.category}>
+                              <div className="flex justify-between text-xs font-medium mb-1">
+                                <span className="text-white capitalize">
+                                  {pred.category.replace(/_/g, ' ')}
+                                </span>
+                                <span className="text-[#00D6B8] font-bold">
+                                  {Math.round(pred.confidence * 100)}%
+                                </span>
+                              </div>
+                              <div className="w-full h-2 rounded-full bg-slate-800/80 border border-cyan-500/15 overflow-hidden">
+                                <div
+                                  className="h-full rounded-full bg-gradient-to-r from-[#0F766E] to-[#00D6B8] transition-all duration-500"
+                                  style={{ width: `${Math.round(pred.confidence * 100)}%` }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="p-3 rounded-xl bg-amber-950/70 border border-amber-500/30 text-amber-300 text-xs">
+                          <strong>AI MODEL NOTICE:</strong> Model inference returned baseline scores.
+                        </div>
+                      )}
+
+                      <p className="text-[11px] text-slate-300 pt-2 border-t border-cyan-500/20">
+                        {aiResult.explanation || 'Visual analysis complete.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* SHORT DESCRIPTION PREVIEW (if provided) */}
+                  {aiResult.shortDescription && (
+                    <div className="p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/20 flex items-start space-x-2">
+                      <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                      <p className="text-xs text-slate-300">{aiResult.shortDescription}</p>
                     </div>
                   )}
 
-                  <p className="text-[11px] text-slate-300 pt-2 border-t border-cyan-500/20">
-                    {aiResult?.explanation || 'Visual analysis complete.'}
-                  </p>
-                </div>
-              </div>
+                  {/* CATEGORY OVERRIDE SELECTOR (CITIZEN CONTROL) */}
+                  <div className="p-4 sm:p-5 rounded-2xl bg-[#071A2F]/70 backdrop-blur-md border border-cyan-500/25">
+                    <label className="block text-xs font-bold text-white mb-1.5">
+                      Verify or Change Predicted Category:
+                    </label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value as ComplaintCategory)}
+                      className="w-full p-2.5 rounded-xl border border-cyan-500/30 bg-[#031223]/90 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    >
+                      {CIVIC_CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {getCategoryLabel(cat)}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="text-[11px] text-slate-300 mt-1.5 block">
+                      You can correct the AI category if the photograph differs.
+                    </span>
+                  </div>
+                </>
+              )}
 
-              {/* CATEGORY OVERRIDE SELECTOR (CITIZEN CONTROL) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#071A2F]/70 backdrop-blur-md border border-cyan-500/25">
-                <label className="block text-xs font-bold text-white mb-1.5">
-                  Verify or Change Predicted Category:
-                </label>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value as ComplaintCategory)}
-                  className="w-full p-2.5 rounded-xl border border-cyan-500/30 bg-[#031223]/90 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                >
-                  {CIVIC_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {getCategoryLabel(cat)}
-                    </option>
-                  ))}
-                </select>
-                <span className="text-[11px] text-slate-300 mt-1.5 block">
-                  You can correct the AI category if the photograph differs.
-                </span>
-              </div>
+              {/* ── API ERROR (no aiResult yet or generic failure) ── */}
+              {!aiResult && (
+                <div className="p-4 rounded-2xl bg-slate-900/70 border border-slate-600/30 text-slate-300 text-xs flex items-center space-x-2">
+                  <AlertCircle className="w-4 h-4 text-slate-400 shrink-0" />
+                  <span>AI analysis did not return a result. Please try re-scanning or upload another image.</span>
+                </div>
+              )}
 
               {/* STEP CONTROLS */}
               <div className="flex items-center justify-between pt-4 border-t border-cyan-500/20">
                 <button
                   type="button"
-                  onClick={() => setCurrentStep(1)}
+                  onClick={handleResetImage}
                   className="py-2.5 px-4 rounded-xl border border-cyan-500/25 bg-[#031223]/60 hover:bg-[#071A2F]/80 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Image</span>
+                  <span>Upload Another Image</span>
                 </button>
                 <button
                   type="button"
-                  onClick={() => setCurrentStep(3)}
-                  className="py-2.5 px-6 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-teal-500/25 transition-all cursor-pointer"
+                  onClick={handleContinueToDescription}
+                  disabled={!aiResult || !aiResult.validProblem || !aiResult.hasLocationContext}
+                  className={`py-2.5 px-6 rounded-xl text-xs font-semibold flex items-center space-x-2 shadow-lg transition-all ${
+                    aiResult && aiResult.validProblem && aiResult.hasLocationContext
+                      ? 'bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white shadow-teal-500/25 cursor-pointer'
+                      : 'bg-slate-900/60 text-slate-500 border border-slate-700/40 cursor-not-allowed'
+                  }`}
                 >
                   <span>Continue to Description</span>
                   <ArrowRight className="w-4 h-4" />

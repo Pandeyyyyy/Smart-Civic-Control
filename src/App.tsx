@@ -94,6 +94,25 @@ export default function App() {
   };
 
   const handleNavigate = (view: string, complaintIdOrPreset?: string) => {
+    // Protected citizen and admin views require authentication
+    if (!currentUser && (
+      view === 'report_problem' ||
+      view === 'citizen_dashboard' ||
+      view === 'citizen_complaints' ||
+      view === 'track_complaint' ||
+      view === 'admin_dashboard' ||
+      view === 'admin_complaints' ||
+      view === 'admin_map' ||
+      view === 'admin_wards' ||
+      view === 'admin_departments' ||
+      view === 'admin_analytics' ||
+      view === 'profile'
+    )) {
+      setCurrentView('login');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     if (view === 'report_problem' && complaintIdOrPreset) {
       setActivePresetId(complaintIdOrPreset);
     } else if (view === 'complaint_detail' && complaintIdOrPreset) {
