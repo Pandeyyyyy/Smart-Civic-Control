@@ -12,15 +12,15 @@ export const AdminDepartmentsView: React.FC<AdminDepartmentsViewProps> = ({ comp
   return (
     <div className="space-y-6 pb-16">
       {/* HEADER */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs">
-        <div className="flex items-center space-x-2 text-[11px] font-bold text-[#0F766E] uppercase tracking-wider mb-1">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
+        <div className="flex items-center space-x-2 text-[11px] font-bold text-[#00D6B8] uppercase tracking-wider mb-1">
           <Building2 className="w-3.5 h-3.5" />
           <span>MUNICIPAL ORGANIZATIONAL STRUCTURE</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+        <h2 className="text-xl sm:text-2xl font-bold text-white">
           Department Directory & Routing Matrix
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
+        <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
           Automated routing protocols mapping problem categories to municipal directorates, SLA targets, and executive engineers.
         </p>
       </div>
@@ -34,7 +34,7 @@ export const AdminDepartmentsView: React.FC<AdminDepartmentsViewProps> = ({ comp
           return (
             <div
               key={dept.id}
-              className="p-6 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/80 shadow-xs space-y-4"
+              className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 hover:border-cyan-400/50 hover:shadow-cyan-950/40 transition-all space-y-4"
             >
               <div className="flex items-start justify-between">
                 <span
@@ -43,28 +43,28 @@ export const AdminDepartmentsView: React.FC<AdminDepartmentsViewProps> = ({ comp
                 >
                   {dept.shortCode}
                 </span>
-                <span className="text-[11px] font-semibold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200/60">
+                <span className="text-[11px] font-semibold text-[#00D6B8] bg-cyan-950/60 px-2 py-0.5 rounded-full border border-cyan-500/30">
                   {active} Active Tickets
                 </span>
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-slate-900">{dept.departmentName}</h3>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                <h3 className="text-sm font-bold text-white">{dept.departmentName}</h3>
+                <p className="text-xs text-slate-300 mt-1 line-clamp-2 leading-relaxed">
                   {dept.description}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
+              <div className="pt-3 border-t border-cyan-500/15 text-xs text-slate-300 space-y-1">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Head Officer:</span>
-                  <span className="font-semibold text-slate-800 truncate max-w-[170px]">
+                  <span className="font-semibold text-white truncate max-w-[170px]">
                     {dept.headOfficer}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Dispatch Email:</span>
-                  <span className="text-slate-700 truncate max-w-[170px]">{dept.contactEmail}</span>
+                  <span className="text-slate-300 truncate max-w-[170px]">{dept.contactEmail}</span>
                 </div>
               </div>
             </div>
@@ -73,15 +73,15 @@ export const AdminDepartmentsView: React.FC<AdminDepartmentsViewProps> = ({ comp
       </div>
 
       {/* DEPARTMENT RULES TABLE */}
-      <div className="p-6 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs">
-        <h3 className="text-sm font-bold text-slate-900 mb-1">Configured Routing Rules Matrix</h3>
-        <p className="text-xs text-slate-500 mb-4">
+      <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
+        <h3 className="text-sm font-bold text-white mb-1">Configured Routing Rules Matrix</h3>
+        <p className="text-xs text-slate-400 mb-4">
           Deterministic classification map: Category + Ward → Target Directorate
         </p>
 
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
-            <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px]">
+            <thead className="bg-[#071A2F]/80 text-slate-400 uppercase font-semibold text-[10px] border-b border-cyan-500/20">
               <tr>
                 <th className="py-2.5 px-3 rounded-l-xl">Problem Category</th>
                 <th className="py-2.5 px-3">Jurisdiction</th>
@@ -90,35 +90,35 @@ export const AdminDepartmentsView: React.FC<AdminDepartmentsViewProps> = ({ comp
                 <th className="py-2.5 px-3 rounded-r-xl">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-cyan-500/15">
               {DEPARTMENT_RULES.map((r) => {
                 const targetDept = DEPARTMENTS.find((d) => d.id === r.departmentId);
                 return (
-                  <tr key={r.id} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-2.5 px-3 font-semibold text-slate-900">
+                  <tr key={r.id} className="hover:bg-[#071A2F]/70 transition-colors">
+                    <td className="py-2.5 px-3 font-semibold text-white">
                       {getCategoryLabel(r.category)}
                     </td>
-                    <td className="py-2.5 px-3 text-slate-600">
+                    <td className="py-2.5 px-3 text-slate-300">
                       {r.city} ({r.wardNumber})
                     </td>
-                    <td className="py-2.5 px-3 font-medium text-teal-800">
+                    <td className="py-2.5 px-3 font-medium text-[#00D6B8]">
                       {targetDept?.departmentName}
                     </td>
                     <td className="py-2.5 px-3">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           r.priority === 'Immediate'
-                            ? 'bg-rose-50 text-rose-700'
+                            ? 'bg-rose-950/70 text-rose-300 border border-rose-500/30'
                             : r.priority === 'High'
-                            ? 'bg-amber-50 text-amber-700'
-                            : 'bg-slate-100 text-slate-600'
+                            ? 'bg-amber-950/70 text-amber-300 border border-amber-500/30'
+                            : 'bg-slate-800 text-slate-300 border border-cyan-500/15'
                         }`}
                       >
                         {r.priority}
                       </span>
                     </td>
                     <td className="py-2.5 px-3">
-                      <span className="text-emerald-700 font-semibold flex items-center space-x-1">
+                      <span className="text-emerald-400 font-semibold flex items-center space-x-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Active</span>
                       </span>

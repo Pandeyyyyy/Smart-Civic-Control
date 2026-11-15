@@ -39,28 +39,28 @@ export const RejectComplaintModal: React.FC<RejectComplaintModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md p-6 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md p-6 rounded-3xl bg-[#031223]/90 backdrop-blur-2xl border border-cyan-500/25 shadow-2xl shadow-black/80">
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+          className="absolute top-5 right-5 p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-[#071A2F] transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
 
-        <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200/60 flex items-center justify-center text-rose-600 mb-4">
+        <div className="w-12 h-12 rounded-2xl bg-rose-950/70 border border-rose-500/30 flex items-center justify-center text-rose-400 mb-4">
           <AlertCircle className="w-6 h-6" />
         </div>
 
-        <h3 className="text-lg font-bold text-slate-900">Reject Complaint</h3>
-        <p className="text-xs text-slate-500 mt-1">
-          Rejecting <span className="font-semibold text-slate-800">{complaint.complaintId}</span> will notify the citizen and close the grievance cycle.
+        <h3 className="text-lg font-bold text-white">Reject Complaint</h3>
+        <p className="text-xs text-slate-300 mt-1">
+          Rejecting <span className="font-semibold text-[#00D6B8]">{complaint.complaintId}</span> will notify the citizen and close the grievance cycle.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-300 mb-1">
               Select or Enter Reason:
             </label>
             <div className="space-y-1.5 mb-2">
@@ -69,7 +69,7 @@ export const RejectComplaintModal: React.FC<RejectComplaintModalProps> = ({
                   type="button"
                   key={idx}
                   onClick={() => setReason(preset)}
-                  className="w-full text-left p-2 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-slate-100/80 text-[11px] text-slate-600 transition-colors"
+                  className="w-full text-left p-2 rounded-xl border border-cyan-500/20 bg-[#071A2F]/60 hover:bg-[#071A2F] text-[11px] text-slate-300 hover:text-white transition-colors cursor-pointer"
                 >
                   {preset}
                 </button>
@@ -84,22 +84,22 @@ export const RejectComplaintModal: React.FC<RejectComplaintModalProps> = ({
                 if (error) setError('');
               }}
               placeholder="Provide a detailed administrative reason for rejection..."
-              className="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500"
+              className="w-full p-3 rounded-xl border border-cyan-500/30 bg-[#071A2F]/80 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/40 focus:border-rose-500"
             />
-            {error && <p className="text-[11px] text-rose-600 font-medium mt-1">{error}</p>}
+            {error && <p className="text-[11px] text-rose-400 font-medium mt-1">{error}</p>}
           </div>
 
           <div className="flex items-center space-x-3 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors"
+              className="flex-1 py-2.5 px-4 rounded-xl border border-cyan-500/25 text-slate-300 text-xs font-semibold hover:bg-[#071A2F]/80 hover:text-white transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow-md transition-colors"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold shadow-md shadow-rose-950/50 transition-colors cursor-pointer"
             >
               Confirm Reject
             </button>

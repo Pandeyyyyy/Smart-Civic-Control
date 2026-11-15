@@ -67,23 +67,23 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
   return (
     <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 overflow-hidden">
       {/* GLASS LOGIN CARD */}
-      <div className="w-full max-w-md p-6 sm:p-8 rounded-3xl bg-white/85 backdrop-blur-2xl border border-white/60 shadow-2xl animate-in fade-in zoom-in-95 duration-300">
+      <div className="w-full max-w-md p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 animate-in fade-in zoom-in-95 duration-300">
         {/* LOGO SYMBOL + TITLE */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-white shadow-sm mb-3">
+          <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-[#071A2F]/80 backdrop-blur-md border border-cyan-500/30 shadow-sm mb-3">
             <LogoSymbol size={48} showAura />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-bold tracking-tight text-white">
             Welcome Back
           </h1>
-          <p className="text-xs text-slate-600 mt-1">
-            Sign in to access your <strong className="text-teal-800">Smart Civic Connect</strong> account
+          <p className="text-xs text-slate-300 mt-1">
+            Sign in to access your <strong className="text-[#00D6B8]">Smart Civic Connect</strong> account
           </p>
         </div>
 
         {/* ERROR BANNER */}
         {errorMessage && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-start space-x-2 animate-in fade-in duration-200">
+          <div className="mb-4 p-3 rounded-xl bg-rose-950/70 border border-rose-500/30 text-xs text-rose-300 flex items-start space-x-2 animate-in fade-in duration-200">
             <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
@@ -92,7 +92,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
         {/* LOGIN FORM */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-200 mb-1">
               Email Address
             </label>
             <div className="relative">
@@ -106,13 +106,13 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
                   if (errorMessage) setErrorMessage('');
                 }}
                 placeholder="name@example.com"
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-[#0F766E]"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-cyan-500/30 text-xs text-white bg-[#071A2F]/80 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40 focus:border-cyan-400"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-200 mb-1">
               Password
             </label>
             <div className="relative">
@@ -126,12 +126,12 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
                   if (errorMessage) setErrorMessage('');
                 }}
                 placeholder="••••••••"
-                className="w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-[#0F766E]"
+                className="w-full pl-9 pr-10 py-2.5 rounded-xl border border-cyan-500/30 text-xs text-white bg-[#071A2F]/80 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40 focus:border-cyan-400"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -139,17 +139,17 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
           </div>
 
           <div className="flex items-center justify-between text-xs pt-1">
-            <label className="flex items-center space-x-2 cursor-pointer text-slate-600 select-none">
+            <label className="flex items-center space-x-2 cursor-pointer text-slate-300 select-none">
               <input
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="rounded border-slate-300 text-[#0F766E] focus:ring-teal-500 w-3.5 h-3.5"
+                className="rounded border-cyan-500/30 bg-[#071A2F] text-[#00D6B8] focus:ring-cyan-500 w-3.5 h-3.5"
               />
               <span>Remember me</span>
             </label>
 
-            <span className="text-[11px] text-teal-700 hover:underline cursor-pointer">
+            <span className="text-[11px] text-[#00D6B8] hover:underline cursor-pointer">
               Forgot password?
             </span>
           </div>
@@ -157,7 +157,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 px-4 rounded-xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-semibold shadow-md shadow-teal-700/20 flex items-center justify-center space-x-2 transition-all hover:scale-[1.01]"
+            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold shadow-lg shadow-teal-500/25 flex items-center justify-center space-x-2 transition-all hover:scale-[1.01] cursor-pointer"
           >
             {isLoading ? (
               <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -171,10 +171,10 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
         </form>
 
         {/* DEMO ACCOUNT PRESETS (CONVENIENCE FOR EVALUATORS) */}
-        <div className="mt-5 pt-4 border-t border-slate-200/60">
+        <div className="mt-5 pt-4 border-t border-cyan-500/20">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1">
-              <Sparkles className="w-3 h-3 text-teal-600" />
+              <Sparkles className="w-3 h-3 text-[#00D6B8]" />
               <span>Evaluation Quick Credentials</span>
             </span>
           </div>
@@ -183,13 +183,13 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
             <button
               type="button"
               onClick={() => handleFillDemo('citizen')}
-              className="py-1.5 px-2 rounded-xl bg-slate-50 hover:bg-teal-50 border border-slate-200/60 text-left transition-colors"
+              className="py-1.5 px-2 rounded-xl bg-[#071A2F]/70 hover:bg-[#071A2F]/90 border border-cyan-500/20 text-left transition-colors cursor-pointer"
             >
-              <div className="flex items-center space-x-1 text-[11px] font-bold text-slate-800">
-                <UserIcon className="w-3 h-3 text-teal-700" />
+              <div className="flex items-center space-x-1 text-[11px] font-bold text-white">
+                <UserIcon className="w-3 h-3 text-[#00D6B8]" />
                 <span>Fill Citizen Demo</span>
               </div>
-              <span className="text-[9px] text-slate-500 block truncate">
+              <span className="text-[9px] text-slate-400 block truncate">
                 citizen@smartcivic.in
               </span>
             </button>
@@ -197,13 +197,13 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
             <button
               type="button"
               onClick={() => handleFillDemo('admin')}
-              className="py-1.5 px-2 rounded-xl bg-slate-50 hover:bg-teal-50 border border-slate-200/60 text-left transition-colors"
+              className="py-1.5 px-2 rounded-xl bg-[#071A2F]/70 hover:bg-[#071A2F]/90 border border-cyan-500/20 text-left transition-colors cursor-pointer"
             >
-              <div className="flex items-center space-x-1 text-[11px] font-bold text-slate-800">
-                <Shield className="w-3 h-3 text-teal-700" />
+              <div className="flex items-center space-x-1 text-[11px] font-bold text-white">
+                <Shield className="w-3 h-3 text-[#00D6B8]" />
                 <span>Fill Admin Demo</span>
               </div>
-              <span className="text-[9px] text-slate-500 block truncate">
+              <span className="text-[9px] text-slate-400 block truncate">
                 admin@smartcivic.gov.in
               </span>
             </button>
@@ -211,13 +211,13 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
         </div>
 
         {/* LINK TO REGISTER & HOME */}
-        <div className="mt-6 pt-4 border-t border-slate-200/60 flex flex-col items-center space-y-2 text-xs text-slate-600">
+        <div className="mt-6 pt-4 border-t border-cyan-500/20 flex flex-col items-center space-y-2 text-xs text-slate-400">
           <p>
             Don't have an account?{' '}
             <button
               type="button"
               onClick={() => onNavigate('register')}
-              className="font-bold text-[#0F766E] hover:underline"
+              className="font-bold text-[#00D6B8] hover:underline cursor-pointer"
             >
               Create Account
             </button>
@@ -226,7 +226,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onNavigate
           <button
             type="button"
             onClick={() => onNavigate('home')}
-            className="text-[11px] text-slate-500 hover:text-slate-800 flex items-center space-x-1"
+            className="text-[11px] text-slate-400 hover:text-white flex items-center space-x-1 cursor-pointer transition-colors"
           >
             <Home className="w-3 h-3" />
             <span>Return to Public Home</span>

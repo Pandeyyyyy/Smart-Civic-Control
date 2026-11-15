@@ -47,12 +47,12 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
   return (
     <div className="space-y-6">
       {/* GREETING & PRIMARY ACTION BANNER */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             {getGreeting()}, {currentUser.name}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
+          <p className="text-xs sm:text-sm text-slate-300 mt-1">
             Report civic issues and track their resolution progress across Dahisar wards.
           </p>
         </div>
@@ -60,7 +60,7 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
         <button
           type="button"
           onClick={() => onNavigate('report_problem')}
-          className="py-3 px-5 rounded-2xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs sm:text-sm font-semibold shadow-md shadow-teal-700/20 flex items-center justify-center space-x-2 transition-all hover:scale-[1.02] shrink-0"
+          className="py-3 px-5 rounded-2xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs sm:text-sm font-semibold shadow-lg shadow-teal-500/25 flex items-center justify-center space-x-2 transition-all hover:scale-[1.02] shrink-0 cursor-pointer"
         >
           <PlusCircle className="w-4 h-4" />
           <span>+ Report a Problem</span>
@@ -70,70 +70,70 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
       {/* METRIC CARDS */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
         {/* Total */}
-        <div className="p-4 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
+        <div className="p-4 rounded-2xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
+          <div className="flex items-center justify-between text-slate-400 mb-2">
             <span className="text-xs font-semibold">Total Complaints</span>
-            <FileText className="w-4 h-4 text-slate-400" />
+            <FileText className="w-4 h-4 text-cyan-400" />
           </div>
-          <p className="text-2xl font-bold text-slate-900">{total}</p>
-          <span className="text-[10px] text-teal-700 font-medium">Logged in portal</span>
+          <p className="text-2xl font-bold text-white">{total}</p>
+          <span className="text-[10px] text-[#00D6B8] font-medium">Logged in portal</span>
         </div>
 
         {/* Pending */}
-        <div className="p-4 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs">
-          <div className="flex items-center justify-between text-amber-600 mb-2">
+        <div className="p-4 rounded-2xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
+          <div className="flex items-center justify-between text-amber-400 mb-2">
             <span className="text-xs font-semibold">Pending</span>
-            <AlertCircle className="w-4 h-4 text-amber-500" />
+            <AlertCircle className="w-4 h-4 text-amber-400" />
           </div>
-          <p className="text-2xl font-bold text-slate-900">{pending}</p>
-          <span className="text-[10px] text-amber-600 font-medium">Awaiting review</span>
+          <p className="text-2xl font-bold text-white">{pending}</p>
+          <span className="text-[10px] text-amber-400 font-medium">Awaiting review</span>
         </div>
 
         {/* In Progress */}
-        <div className="p-4 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs">
-          <div className="flex items-center justify-between text-sky-600 mb-2">
+        <div className="p-4 rounded-2xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
+          <div className="flex items-center justify-between text-sky-400 mb-2">
             <span className="text-xs font-semibold">In Progress</span>
-            <Clock className="w-4 h-4 text-sky-500" />
+            <Clock className="w-4 h-4 text-sky-400" />
           </div>
-          <p className="text-2xl font-bold text-slate-900">{inProgress}</p>
-          <span className="text-[10px] text-sky-600 font-medium">Field crew active</span>
+          <p className="text-2xl font-bold text-white">{inProgress}</p>
+          <span className="text-[10px] text-sky-400 font-medium">Field crew active</span>
         </div>
 
         {/* Resolved */}
-        <div className="p-4 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs">
-          <div className="flex items-center justify-between text-emerald-600 mb-2">
+        <div className="p-4 rounded-2xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
+          <div className="flex items-center justify-between text-emerald-400 mb-2">
             <span className="text-xs font-semibold">Resolved</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           </div>
-          <p className="text-2xl font-bold text-slate-900">{resolved}</p>
-          <span className="text-[10px] text-emerald-600 font-medium">Closed & verified</span>
+          <p className="text-2xl font-bold text-white">{resolved}</p>
+          <span className="text-[10px] text-emerald-400 font-medium">Closed & verified</span>
         </div>
 
         {/* Rejected */}
-        <div className="p-4 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs col-span-2 sm:col-span-1">
-          <div className="flex items-center justify-between text-rose-600 mb-2">
+        <div className="p-4 rounded-2xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 col-span-2 sm:col-span-1">
+          <div className="flex items-center justify-between text-rose-400 mb-2">
             <span className="text-xs font-semibold">Rejected</span>
-            <XCircle className="w-4 h-4 text-rose-500" />
+            <XCircle className="w-4 h-4 text-rose-400" />
           </div>
-          <p className="text-2xl font-bold text-slate-900">{rejected}</p>
-          <span className="text-[10px] text-rose-600 font-medium">Non-civic / invalid</span>
+          <p className="text-2xl font-bold text-white">{rejected}</p>
+          <span className="text-[10px] text-rose-400 font-medium">Non-civic / invalid</span>
         </div>
       </div>
 
       {/* TWO COLUMN GRID: RECENT COMPLAINTS & QUICK MAP */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* RECENT COMPLAINTS TABLE (7 COLS) */}
-        <div className="lg:col-span-7 p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs">
+        <div className="lg:col-span-7 p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">My Recent Grievances</h3>
-              <p className="text-xs text-slate-500">Track latest status and ward assignment</p>
+              <h3 className="text-sm font-bold text-white">My Recent Grievances</h3>
+              <p className="text-xs text-slate-400">Track latest status and ward assignment</p>
             </div>
             {userComplaints.length > 5 && (
               <button
                 type="button"
                 onClick={() => onNavigate('citizen_complaints')}
-                className="text-xs font-semibold text-[#0F766E] hover:text-[#115E59] flex items-center space-x-1"
+                className="text-xs font-semibold text-[#00D6B8] hover:text-cyan-300 flex items-center space-x-1 cursor-pointer transition-colors"
               >
                 <span>View all ({total})</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -143,51 +143,51 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
 
           {recentComplaints.length === 0 ? (
             <div className="py-12 text-center">
-              <FileText className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-              <p className="text-xs text-slate-600 font-medium">You haven't reported any grievances yet.</p>
+              <FileText className="w-10 h-10 text-slate-500 mx-auto mb-2" />
+              <p className="text-xs text-slate-400 font-medium">You haven't reported any grievances yet.</p>
               <button
                 type="button"
                 onClick={() => onNavigate('report_problem')}
-                className="mt-3 px-4 py-2 rounded-xl bg-[#0F766E] text-white text-xs font-semibold shadow-xs"
+                className="mt-3 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] text-white text-xs font-semibold shadow-xs cursor-pointer"
               >
                 File your first complaint
               </button>
             </div>
           ) : (
-            <div className="divide-y divide-slate-100">
+            <div className="divide-y divide-cyan-500/15">
               {recentComplaints.map((c) => (
                 <div
                   key={c.id}
                   onClick={() => onNavigate('complaint_detail', c.complaintId)}
-                  className="py-3.5 flex items-center justify-between hover:bg-slate-50/80 -mx-2 px-2 rounded-xl cursor-pointer transition-colors group"
+                  className="py-3.5 flex items-center justify-between hover:bg-[#071A2F]/80 -mx-2 px-2 rounded-xl cursor-pointer transition-colors group"
                 >
                   <div className="flex items-start space-x-3">
                     <img
                       src={c.imageUrl}
                       alt={c.finalCategory}
-                      className="w-12 h-12 rounded-xl object-cover border border-slate-200/80 shrink-0"
+                      className="w-12 h-12 rounded-xl object-cover border border-cyan-500/30 shrink-0"
                     />
                     <div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-[11px] font-bold text-teal-800">
+                        <span className="text-[11px] font-bold text-[#00D6B8]">
                           {c.complaintId}
                         </span>
-                        <span className="text-xs text-slate-400">•</span>
-                        <span className="text-xs font-bold text-slate-900 capitalize">
+                        <span className="text-xs text-slate-500">•</span>
+                        <span className="text-xs font-bold text-white capitalize">
                           {c.finalCategory.replace('_', ' ')}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 line-clamp-1 mt-0.5 max-w-xs sm:max-w-md">
+                      <p className="text-xs text-slate-300 line-clamp-1 mt-0.5 max-w-xs sm:max-w-md">
                         {c.description}
                       </p>
                       <div className="flex items-center space-x-3 text-[11px] text-slate-400 mt-1">
                         <span className="flex items-center space-x-1">
-                          <MapPin className="w-3 h-3 text-slate-400" />
+                          <MapPin className="w-3 h-3 text-cyan-400" />
                           <span>{c.demoWardNumber}</span>
                         </span>
                         <span>•</span>
                         <span className="flex items-center space-x-1">
-                          <Building2 className="w-3 h-3 text-slate-400" />
+                          <Building2 className="w-3 h-3 text-cyan-400" />
                           <span className="truncate max-w-[130px]">{c.departmentName}</span>
                         </span>
                       </div>
@@ -198,12 +198,12 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
                     <span
                       className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
                         c.status === 'Resolved'
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
+                          ? 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/30'
                           : c.status === 'In Progress'
-                          ? 'bg-sky-50 text-sky-700 border border-sky-200/60'
+                          ? 'bg-sky-950/70 text-sky-300 border border-sky-500/30'
                           : c.status === 'Rejected'
-                          ? 'bg-rose-50 text-rose-700 border border-rose-200/60'
-                          : 'bg-amber-50 text-amber-700 border border-amber-200/60'
+                          ? 'bg-rose-950/70 text-rose-300 border border-rose-500/30'
+                          : 'bg-amber-950/70 text-amber-300 border border-amber-500/30'
                       }`}
                     >
                       {c.status}
@@ -219,13 +219,13 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
         </div>
 
         {/* QUICK MAP PREVIEW (5 COLS) */}
-        <div className="lg:col-span-5 p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-5 p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Ward Grievance Map</h3>
-              <p className="text-xs text-slate-500">Live locations in Dahisar R/North</p>
+              <h3 className="text-sm font-bold text-white">Ward Grievance Map</h3>
+              <p className="text-xs text-slate-400">Live locations in Dahisar R/North</p>
             </div>
-            <span className="text-[11px] text-teal-700 font-semibold">
+            <span className="text-[11px] text-[#00D6B8] font-semibold">
               {complaints.length} registered
             </span>
           </div>
@@ -238,12 +238,12 @@ export const CitizenDashboardView: React.FC<CitizenDashboardViewProps> = ({
             />
           </div>
 
-          <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <div className="pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-slate-400">
             <span>Dahisar East & West</span>
             <button
               type="button"
               onClick={() => onNavigate('track_complaint')}
-              className="font-semibold text-teal-700 hover:text-teal-800"
+              className="font-semibold text-[#00D6B8] hover:text-cyan-300 cursor-pointer transition-colors"
             >
               Open Full Tracker →
             </button>

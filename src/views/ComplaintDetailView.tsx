@@ -46,15 +46,15 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
 
   if (!complaint) {
     return (
-      <div className="p-12 text-center bg-white/80 rounded-3xl border border-slate-200">
-        <h3 className="text-lg font-bold text-slate-900">Complaint Not Found</h3>
-        <p className="text-xs text-slate-500 mt-1">
-          The requested record <span className="font-semibold">{complaintId}</span> does not exist in the municipal register.
+      <div className="p-12 text-center bg-[#031223]/75 backdrop-blur-xl rounded-3xl border border-cyan-500/25 shadow-xl shadow-black/40">
+        <h3 className="text-lg font-bold text-white">Complaint Not Found</h3>
+        <p className="text-xs text-slate-400 mt-1">
+          The requested record <span className="font-semibold text-[#00D6B8]">{complaintId}</span> does not exist in the municipal register.
         </p>
         <button
           type="button"
           onClick={() => onNavigate(currentUser.role === 'admin' ? 'admin_complaints' : 'citizen_dashboard')}
-          className="mt-4 px-4 py-2 rounded-xl bg-[#0F766E] text-white text-xs font-semibold"
+          className="mt-4 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold cursor-pointer shadow-md shadow-teal-500/25"
         >
           Return to Dashboard
         </button>
@@ -78,17 +78,17 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
           <button
             type="button"
             onClick={() => onNavigate(isAdmin ? 'admin_complaints' : 'citizen_complaints')}
-            className="p-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 transition-colors"
+            className="p-2 rounded-xl bg-[#071A2F]/80 hover:bg-[#071A2F] border border-cyan-500/30 text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-bold text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded-md border border-teal-200/60">
+              <span className="text-xs font-bold text-[#00D6B8] bg-cyan-950/60 px-2.5 py-0.5 rounded-md border border-cyan-500/30">
                 {complaint.complaintId}
               </span>
-              <span className="text-xs text-slate-400">•</span>
-              <span className="text-xs text-slate-500">
+              <span className="text-xs text-slate-500">•</span>
+              <span className="text-xs text-slate-400">
                 {new Date(complaint.createdAt).toLocaleDateString('en-IN', {
                   day: 'numeric',
                   month: 'short',
@@ -96,7 +96,7 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
                 })}
               </span>
             </div>
-            <h2 className="text-xl font-bold text-slate-900 capitalize mt-0.5">
+            <h2 className="text-xl font-bold text-white capitalize mt-0.5">
               {complaint.finalCategory.replace('_', ' ')}
             </h2>
           </div>
@@ -108,7 +108,7 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
             <button
               type="button"
               onClick={() => onOpenSendToAuthority && onOpenSendToAuthority(complaint)}
-              className="py-2 px-3.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 text-xs font-semibold flex items-center space-x-1.5 transition-colors"
+              className="py-2 px-3.5 rounded-xl bg-cyan-950/70 hover:bg-cyan-900/80 text-[#00D6B8] border border-cyan-500/30 text-xs font-semibold flex items-center space-x-1.5 transition-colors cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Send to Authority (Demo)</span>
@@ -118,7 +118,7 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
               <button
                 type="button"
                 onClick={() => onOpenRejectModal && onOpenRejectModal(complaint)}
-                className="py-2 px-3.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center space-x-1.5 transition-colors"
+                className="py-2 px-3.5 rounded-xl bg-rose-950/70 hover:bg-rose-900/80 text-rose-300 border border-rose-500/30 text-xs font-semibold flex items-center space-x-1.5 transition-colors cursor-pointer"
               >
                 <ShieldAlert className="w-3.5 h-3.5" />
                 <span>Reject</span>
@@ -133,44 +133,44 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
         {/* LEFT COLUMN: IMAGE & AI METRICS (5 COLS) */}
         <div className="md:col-span-5 space-y-6">
           {/* IMAGE CARD */}
-          <div className="p-4 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs">
+          <div className="p-4 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
             <img
               src={complaint.imageUrl}
               alt={complaint.finalCategory}
-              className="w-full h-64 object-cover rounded-2xl shadow-sm border border-slate-200"
+              className="w-full h-64 object-cover rounded-2xl shadow-sm border border-cyan-500/30"
             />
-            <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
+            <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
               <span className="truncate max-w-[200px]">{complaint.imageFileName}</span>
-              <span className="text-[11px] text-teal-700 font-semibold">Verified Upload</span>
+              <span className="text-[11px] text-[#00D6B8] font-semibold">Verified Upload</span>
             </div>
           </div>
 
           {/* AI INFERENCE BREAKDOWN CARD */}
-          <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs space-y-3">
+          <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-teal-800 uppercase tracking-wider flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-teal-700" />
+              <span className="text-xs font-bold text-[#00D6B8] uppercase tracking-wider flex items-center space-x-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#00D6B8]" />
                 <span>AI Prediction Metrics</span>
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-700">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950/60 text-[#00D6B8] border border-cyan-500/30">
                 {Math.round((complaint.aiConfidence || 0.94) * 100)}% Confidence
               </span>
             </div>
 
-            <div className="text-xs space-y-2 text-slate-600">
+            <div className="text-xs space-y-2 text-slate-400">
               <div className="flex justify-between">
                 <span>Visual Classifier:</span>
-                <span className="font-semibold text-slate-800 capitalize">
+                <span className="font-semibold text-slate-200 capitalize">
                   {complaint.aiCategory?.replace('_', ' ') || complaint.finalCategory.replace('_', ' ')}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Multimodal Weighting:</span>
-                <span className="font-semibold text-slate-800">70% Vision + 30% NLP</span>
+                <span className="font-semibold text-slate-200">70% Vision + 30% NLP</span>
               </div>
               <div className="flex justify-between">
                 <span>Confirmation Status:</span>
-                <span className="font-semibold text-emerald-700">
+                <span className="font-semibold text-emerald-400">
                   {complaint.requiresUserConfirmation ? 'User Verified' : 'Direct High Match'}
                 </span>
               </div>
@@ -178,16 +178,16 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
           </div>
 
           {/* RESPONSIBLE DEPARTMENT CARD */}
-          <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs space-y-3">
-            <div className="flex items-center space-x-2 text-xs font-bold text-slate-700 uppercase tracking-wider">
-              <Building2 className="w-4 h-4 text-teal-700" />
+          <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-3">
+            <div className="flex items-center space-x-2 text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <Building2 className="w-4 h-4 text-cyan-400" />
               <span>Assigned Municipal Dept</span>
             </div>
-            <h4 className="text-sm font-bold text-slate-900">{complaint.departmentName}</h4>
-            <p className="text-xs text-slate-500">
+            <h4 className="text-sm font-bold text-white">{complaint.departmentName}</h4>
+            <p className="text-xs text-slate-400">
               Operating under Dahisar {complaint.administrativeWard} ward administration.
             </p>
-            <div className="pt-2 border-t border-slate-100 text-xs text-slate-600 space-y-1">
+            <div className="pt-2 border-t border-cyan-500/15 text-xs text-slate-400 space-y-1">
               <div className="flex items-center space-x-2">
                 <Mail className="w-3.5 h-3.5 text-slate-400" />
                 <span className="text-[11px] truncate">desk.rnorth@demo-mcgm.gov.in</span>
@@ -203,14 +203,14 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
         {/* RIGHT COLUMN: DESCRIPTION, MAP & TIMELINE (7 COLS) */}
         <div className="md:col-span-7 space-y-6">
           {/* DESCRIPTION CARD */}
-          <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs space-y-3">
-            <h3 className="text-sm font-bold text-slate-900">Problem Description</h3>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-50/70 p-4 rounded-2xl border border-slate-200/60">
+          <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-3">
+            <h3 className="text-sm font-bold text-white">Problem Description</h3>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed bg-[#071A2F]/70 p-4 rounded-2xl border border-cyan-500/20">
               {complaint.description}
             </p>
             {complaint.speechTranscript && complaint.speechTranscript !== complaint.description && (
-              <div className="mt-2 text-xs text-slate-500">
-                <span className="font-semibold text-slate-600">Speech Audio Transcript:</span>{' '}
+              <div className="mt-2 text-xs text-slate-400">
+                <span className="font-semibold text-slate-300">Speech Audio Transcript:</span>{' '}
                 <em>"{complaint.speechTranscript}"</em>
               </div>
             )}
@@ -220,13 +220,13 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
           <Timeline complaint={complaint} />
 
           {/* LOCATION & WARD MAP CARD */}
-          <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs space-y-3">
+          <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Location & Ward Pin</h3>
-                <p className="text-xs text-slate-500">{complaint.address}</p>
+                <h3 className="text-sm font-bold text-white">Location & Ward Pin</h3>
+                <p className="text-xs text-slate-400">{complaint.address}</p>
               </div>
-              <span className="text-xs font-bold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200/60">
+              <span className="text-xs font-bold text-[#00D6B8] bg-cyan-950/60 px-2.5 py-1 rounded-full border border-cyan-500/30">
                 {complaint.demoWardNumber}
               </span>
             </div>
@@ -241,36 +241,36 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
 
           {/* CITIZEN SATISFACTION FEEDBACK (If Resolved) */}
           {complaint.status === 'Resolved' && (
-            <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs space-y-4">
+            <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-4">
               <div className="flex items-center space-x-2">
-                <MessageSquare className="w-4 h-4 text-emerald-600" />
-                <h3 className="text-sm font-bold text-slate-900">Citizen Satisfaction Feedback</h3>
+                <MessageSquare className="w-4 h-4 text-emerald-400" />
+                <h3 className="text-sm font-bold text-white">Citizen Satisfaction Feedback</h3>
               </div>
 
               {feedbackSubmitted ? (
-                <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 text-xs text-emerald-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/30 text-xs text-emerald-300 space-y-1">
                   <div className="flex items-center space-x-1">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <Star
                         key={s}
                         className={`w-4 h-4 ${
-                          s <= rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'
+                          s <= rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'
                         }`}
                       />
                     ))}
                     <span className="ml-2 font-bold">{rating} / 5 Stars</span>
                   </div>
-                  <p className="font-medium text-slate-700 mt-2">
+                  <p className="font-medium text-slate-200 mt-2">
                     Comment: "{feedbackComment || 'Resolution verified by resident.'}"
                   </p>
-                  <span className="text-[10px] text-emerald-600 block mt-1">
+                  <span className="text-[10px] text-emerald-400 block mt-1">
                     ✓ Feedback recorded in ward compliance score.
                   </span>
                 </div>
               ) : (
                 <form onSubmit={handleFeedbackSubmit} className="space-y-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
                       Rate Resolution Quality:
                     </label>
                     <div className="flex items-center space-x-2">
@@ -279,21 +279,21 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
                           type="button"
                           key={s}
                           onClick={() => setRating(s)}
-                          className="p-1 hover:scale-110 transition-transform"
+                          className="p-1 hover:scale-110 transition-transform cursor-pointer"
                         >
                           <Star
                             className={`w-6 h-6 ${
-                              s <= rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'
+                              s <= rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'
                             }`}
                           />
                         </button>
                       ))}
-                      <span className="text-xs font-bold text-slate-700 ml-2">{rating} Stars</span>
+                      <span className="text-xs font-bold text-slate-200 ml-2">{rating} Stars</span>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
                       Comments / Experience:
                     </label>
                     <textarea
@@ -301,13 +301,13 @@ export const ComplaintDetailView: React.FC<ComplaintDetailViewProps> = ({
                       value={feedbackComment}
                       onChange={(e) => setFeedbackComment(e.target.value)}
                       placeholder="Share your comments regarding the repair speed, cleanliness, etc."
-                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500/30"
+                      className="w-full p-2.5 rounded-xl border border-cyan-500/30 bg-[#071A2F]/80 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40 focus:border-cyan-400"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="py-2 px-4 rounded-xl bg-[#0F766E] hover:bg-[#115E59] text-white text-xs font-semibold shadow-xs"
+                    className="py-2 px-4 rounded-xl bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-xs font-semibold shadow-md cursor-pointer"
                   >
                     Submit Feedback
                   </button>

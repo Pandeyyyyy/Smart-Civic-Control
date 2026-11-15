@@ -43,19 +43,19 @@ export const AdminMapView: React.FC<AdminMapViewProps> = ({
   return (
     <div className="space-y-4 pb-16">
       {/* HEADER & FILTER CONTROLS */}
-      <div className="p-5 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs space-y-3">
+      <div className="p-5 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Geospatial Operations Map</h2>
-            <p className="text-xs text-slate-500">
-              Interactive Dahisar municipal grid • Plotting {filtered.length} filtered pins
+            <h2 className="text-xl font-bold text-white">Geospatial Operations Map</h2>
+            <p className="text-xs text-slate-400">
+              Interactive Dahisar municipal grid • Plotting <span className="text-[#00D6B8] font-semibold">{filtered.length}</span> filtered pins
             </p>
           </div>
 
           <button
             type="button"
             onClick={handleReset}
-            className="text-xs font-semibold text-teal-700 hover:text-teal-900 flex items-center space-x-1 self-start sm:self-auto"
+            className="text-xs font-semibold text-[#00D6B8] hover:text-cyan-300 flex items-center space-x-1 self-start sm:self-auto cursor-pointer transition-colors"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Reset Map Filters</span>
@@ -65,27 +65,27 @@ export const AdminMapView: React.FC<AdminMapViewProps> = ({
         {/* COMPACT FILTER BAR */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1">
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">City</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-0.5">City</label>
             <select
               value={filters.city}
               onChange={(e) => setFilters({ ...filters, city: e.target.value })}
-              className="w-full p-1.5 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700"
+              className="w-full p-1.5 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
             >
-              <option value="All Cities">All Cities</option>
-              <option value="Mumbai">Mumbai</option>
+              <option value="All Cities" className="bg-[#031223] text-white">All Cities</option>
+              <option value="Mumbai" className="bg-[#031223] text-white">Mumbai</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Demo Ward</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-0.5">Demo Ward</label>
             <select
               value={filters.ward}
               onChange={(e) => setFilters({ ...filters, ward: e.target.value })}
-              className="w-full p-1.5 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700"
+              className="w-full p-1.5 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
             >
-              <option value="All Wards">All Wards</option>
+              <option value="All Wards" className="bg-[#031223] text-white">All Wards</option>
               {DEMO_WARDS.map((w) => (
-                <option key={w.demoWardNumber} value={w.demoWardNumber}>
+                <option key={w.demoWardNumber} value={w.demoWardNumber} className="bg-[#031223] text-white">
                   {w.demoWardNumber}
                 </option>
               ))}
@@ -93,15 +93,15 @@ export const AdminMapView: React.FC<AdminMapViewProps> = ({
           </div>
 
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Department</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-0.5">Department</label>
             <select
               value={filters.department}
               onChange={(e) => setFilters({ ...filters, department: e.target.value })}
-              className="w-full p-1.5 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700"
+              className="w-full p-1.5 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
             >
-              <option value="All Departments">All Departments</option>
+              <option value="All Departments" className="bg-[#031223] text-white">All Departments</option>
               {DEPARTMENTS.map((d) => (
-                <option key={d.id} value={d.id}>
+                <option key={d.id} value={d.id} className="bg-[#031223] text-white">
                   {d.shortCode}
                 </option>
               ))}
@@ -109,15 +109,15 @@ export const AdminMapView: React.FC<AdminMapViewProps> = ({
           </div>
 
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Category</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-0.5">Category</label>
             <select
               value={filters.category}
               onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-              className="w-full p-1.5 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700"
+              className="w-full p-1.5 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
             >
-              <option value="All Categories">All Categories</option>
+              <option value="All Categories" className="bg-[#031223] text-white">All Categories</option>
               {CIVIC_CATEGORIES.map((c) => (
-                <option key={c} value={c}>
+                <option key={c} value={c} className="bg-[#031223] text-white">
                   {getCategoryLabel(c)}
                 </option>
               ))}
@@ -125,17 +125,17 @@ export const AdminMapView: React.FC<AdminMapViewProps> = ({
           </div>
 
           <div className="col-span-2 sm:col-span-1">
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Status</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-0.5">Status</label>
             <select
               value={filters.status}
               onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-              className="w-full p-1.5 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700"
+              className="w-full p-1.5 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
             >
-              <option value="All Statuses">All Statuses</option>
-              <option value="Pending">Pending</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Resolved">Resolved</option>
-              <option value="Rejected">Rejected</option>
+              <option value="All Statuses" className="bg-[#031223] text-white">All Statuses</option>
+              <option value="Pending" className="bg-[#031223] text-white">Pending</option>
+              <option value="In Progress" className="bg-[#031223] text-white">In Progress</option>
+              <option value="Resolved" className="bg-[#031223] text-white">Resolved</option>
+              <option value="Rejected" className="bg-[#031223] text-white">Rejected</option>
             </select>
           </div>
         </div>

@@ -132,10 +132,10 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
   return (
     <div className="space-y-6 pb-16">
       {/* HEADER & CSV EXPORT */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Municipal Complaint Register</h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-white">Municipal Complaint Register</h2>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1">
             Displaying {sorted.length} matching tickets across Dahisar R/North Demo Wards
           </p>
         </div>
@@ -144,26 +144,26 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
           <button
             type="button"
             onClick={handleExportCSV}
-            className="py-2.5 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold border border-slate-200 shadow-xs flex items-center space-x-2 transition-all"
+            className="py-2.5 px-4 rounded-xl bg-[#071A2F]/80 hover:bg-[#071A2F] text-white text-xs font-semibold border border-cyan-500/30 shadow-xs flex items-center space-x-2 transition-all cursor-pointer"
           >
-            <Download className="w-4 h-4 text-teal-700" />
+            <Download className="w-4 h-4 text-[#00D6B8]" />
             <span>Export CSV</span>
           </button>
         </div>
       </div>
 
       {/* 6-WAY FILTER PANEL (CRITICAL REQUIREMENT) */}
-      <div className="p-5 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/80 shadow-xs space-y-3">
+      <div className="p-5 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40 space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 text-xs font-bold text-slate-800">
-            <Filter className="w-3.5 h-3.5 text-teal-700" />
+          <div className="flex items-center space-x-2 text-xs font-bold text-white">
+            <Filter className="w-3.5 h-3.5 text-[#00D6B8]" />
             <span>Active Filters & Query</span>
           </div>
 
           <button
             type="button"
             onClick={handleResetFilters}
-            className="text-[11px] font-semibold text-teal-700 hover:text-teal-900 flex items-center space-x-1"
+            className="text-[11px] font-semibold text-[#00D6B8] hover:text-cyan-300 flex items-center space-x-1 cursor-pointer transition-colors"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Reset Filters</span>
@@ -181,7 +181,7 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
               setCurrentPage(1);
             }}
             placeholder="Search complaint ID, description, address, category, or citizen name..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/30"
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-cyan-500/30 text-xs text-white bg-[#071A2F]/80 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40 focus:border-cyan-400"
           />
         </div>
 
@@ -189,34 +189,34 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 pt-1">
           {/* CITY */}
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">City</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">City</label>
             <select
               value={filters.city}
               onChange={(e) => {
                 setFilters({ ...filters, city: e.target.value });
                 setCurrentPage(1);
               }}
-              className="w-full p-2 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full p-2 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
             >
-              <option value="All Cities">All Cities</option>
-              <option value="Mumbai">Mumbai</option>
+              <option value="All Cities" className="bg-[#031223] text-white">All Cities</option>
+              <option value="Mumbai" className="bg-[#031223] text-white">Mumbai</option>
             </select>
           </div>
 
           {/* WARD */}
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Demo Ward</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Demo Ward</label>
             <select
               value={filters.ward}
               onChange={(e) => {
                 setFilters({ ...filters, ward: e.target.value });
                 setCurrentPage(1);
               }}
-              className="w-full p-2 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full p-2 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
             >
-              <option value="All Wards">All Wards</option>
+              <option value="All Wards" className="bg-[#031223] text-white">All Wards</option>
               {DEMO_WARDS.map((w) => (
-                <option key={w.demoWardNumber} value={w.demoWardNumber}>
+                <option key={w.demoWardNumber} value={w.demoWardNumber} className="bg-[#031223] text-white">
                   {w.demoWardNumber}
                 </option>
               ))}
@@ -225,18 +225,18 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
 
           {/* DEPARTMENT */}
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Department</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Department</label>
             <select
               value={filters.department}
               onChange={(e) => {
                 setFilters({ ...filters, department: e.target.value });
                 setCurrentPage(1);
               }}
-              className="w-full p-2 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full p-2 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
             >
-              <option value="All Departments">All Departments</option>
+              <option value="All Departments" className="bg-[#031223] text-white">All Departments</option>
               {DEPARTMENTS.map((d) => (
-                <option key={d.id} value={d.id}>
+                <option key={d.id} value={d.id} className="bg-[#031223] text-white">
                   {d.shortCode} – {d.departmentName.split(' ')[0]}
                 </option>
               ))}
@@ -245,18 +245,18 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
 
           {/* CATEGORY */}
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Category</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Category</label>
             <select
               value={filters.category}
               onChange={(e) => {
                 setFilters({ ...filters, category: e.target.value });
                 setCurrentPage(1);
               }}
-              className="w-full p-2 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full p-2 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
             >
-              <option value="All Categories">All Categories</option>
+              <option value="All Categories" className="bg-[#031223] text-white">All Categories</option>
               {CIVIC_CATEGORIES.map((c) => (
-                <option key={c} value={c}>
+                <option key={c} value={c} className="bg-[#031223] text-white">
                   {getCategoryLabel(c)}
                 </option>
               ))}
@@ -265,35 +265,35 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
 
           {/* STATUS */}
           <div className="col-span-2 sm:col-span-1">
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Status</label>
+            <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Status</label>
             <select
               value={filters.status}
               onChange={(e) => {
                 setFilters({ ...filters, status: e.target.value });
                 setCurrentPage(1);
               }}
-              className="w-full p-2 rounded-xl border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full p-2 rounded-xl border border-cyan-500/30 bg-[#071A2F]/90 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
             >
-              <option value="All Statuses">All Statuses</option>
-              <option value="Pending">Pending</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Resolved">Resolved</option>
-              <option value="Rejected">Rejected</option>
+              <option value="All Statuses" className="bg-[#031223] text-white">All Statuses</option>
+              <option value="Pending" className="bg-[#031223] text-white">Pending</option>
+              <option value="In Progress" className="bg-[#031223] text-white">In Progress</option>
+              <option value="Resolved" className="bg-[#031223] text-white">Resolved</option>
+              <option value="Rejected" className="bg-[#031223] text-white">Rejected</option>
             </select>
           </div>
         </div>
       </div>
 
       {/* COMPLAINTS DATA TABLE */}
-      <div className="p-6 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xs">
+      <div className="p-6 rounded-3xl bg-[#031223]/75 backdrop-blur-xl border border-cyan-500/25 shadow-xl shadow-black/40">
         {paginated.length === 0 ? (
           <div className="py-16 text-center">
-            <p className="text-sm font-bold text-slate-700">No complaints matching filter criteria.</p>
+            <p className="text-sm font-bold text-white">No complaints matching filter criteria.</p>
             <p className="text-xs text-slate-400 mt-1">Try resetting filters to show all registered records.</p>
             <button
               type="button"
               onClick={handleResetFilters}
-              className="mt-4 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold"
+              className="mt-4 px-4 py-2 rounded-xl bg-[#071A2F] hover:bg-[#071A2F]/80 text-white text-xs font-semibold border border-cyan-500/25 cursor-pointer"
             >
               Reset Filters
             </button>
@@ -301,7 +301,7 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left">
-              <thead className="bg-slate-50/80 text-slate-500 uppercase font-semibold text-[10px] border-b border-slate-200/60">
+              <thead className="bg-[#071A2F]/80 text-slate-400 uppercase font-semibold text-[10px] border-b border-cyan-500/20">
                 <tr>
                   <th className="py-3 px-3 rounded-l-xl">ID</th>
                   <th className="py-3 px-2">Image</th>
@@ -315,15 +315,15 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                   <th className="py-3 px-3 rounded-r-xl text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-cyan-500/15">
                 {paginated.map((c) => (
                   <tr
                     key={c.id}
-                    className="hover:bg-slate-50/80 transition-colors group cursor-pointer"
+                    className="hover:bg-[#071A2F]/70 transition-colors group cursor-pointer"
                     onClick={() => onNavigate('complaint_detail', c.complaintId)}
                   >
                     {/* ID */}
-                    <td className="py-3 px-3 font-bold text-teal-800 whitespace-nowrap">
+                    <td className="py-3 px-3 font-bold text-[#00D6B8] whitespace-nowrap">
                       {c.complaintId}
                     </td>
 
@@ -332,34 +332,34 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                       <img
                         src={c.imageUrl}
                         alt="Thumbnail"
-                        className="w-10 h-10 rounded-xl object-cover border border-slate-200 shadow-2xs"
+                        className="w-10 h-10 rounded-xl object-cover border border-cyan-500/30 shadow-2xs"
                       />
                     </td>
 
                     {/* PROBLEM */}
-                    <td className="py-3 px-3 font-semibold text-slate-800 capitalize whitespace-nowrap">
+                    <td className="py-3 px-3 font-semibold text-white capitalize whitespace-nowrap">
                       {c.finalCategory.replace('_', ' ')}
                     </td>
 
                     {/* AI CONFIDENCE */}
                     <td className="py-3 px-3 whitespace-nowrap">
-                      <span className="font-semibold text-slate-700">
+                      <span className="font-semibold text-slate-200">
                         {Math.round((c.aiConfidence || 0.93) * 100)}%
                       </span>
                     </td>
 
                     {/* CITY / AREA */}
-                    <td className="py-3 px-3 text-slate-600 whitespace-nowrap">
+                    <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
                       {c.city} • {c.area}
                     </td>
 
                     {/* WARD */}
                     <td className="py-3 px-3 whitespace-nowrap">
-                      <span className="font-semibold text-teal-800">{c.demoWardNumber}</span>
+                      <span className="font-semibold text-[#00D6B8]">{c.demoWardNumber}</span>
                     </td>
 
                     {/* DEPARTMENT */}
-                    <td className="py-3 px-3 text-slate-600 truncate max-w-[150px]">
+                    <td className="py-3 px-3 text-slate-300 truncate max-w-[150px]">
                       {c.departmentName}
                     </td>
 
@@ -373,23 +373,23 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                         onChange={(e) => handleQuickStatusChange(c.complaintId, e.target.value as ComplaintStatus)}
                         className={`text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded-full border focus:outline-none cursor-pointer ${
                           c.status === 'Resolved'
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                            ? 'bg-emerald-950/70 text-emerald-300 border-emerald-500/30'
                             : c.status === 'In Progress'
-                            ? 'bg-sky-50 text-sky-700 border-sky-200'
+                            ? 'bg-sky-950/70 text-sky-300 border-sky-500/30'
                             : c.status === 'Rejected'
-                            ? 'bg-rose-50 text-rose-700 border-rose-200'
-                            : 'bg-amber-50 text-amber-700 border-amber-200'
+                            ? 'bg-rose-950/70 text-rose-300 border-rose-500/30'
+                            : 'bg-amber-950/70 text-amber-300 border-amber-500/30'
                         }`}
                       >
-                        <option value="Pending">Pending</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Resolved">Resolved</option>
-                        <option value="Rejected">Rejected</option>
+                        <option value="Pending" className="bg-[#031223] text-white">Pending</option>
+                        <option value="In Progress" className="bg-[#031223] text-white">In Progress</option>
+                        <option value="Resolved" className="bg-[#031223] text-white">Resolved</option>
+                        <option value="Rejected" className="bg-[#031223] text-white">Rejected</option>
                       </select>
                     </td>
 
                     {/* DATE */}
-                    <td className="py-3 px-3 text-slate-500 text-[11px] whitespace-nowrap">
+                    <td className="py-3 px-3 text-slate-400 text-[11px] whitespace-nowrap">
                       {new Date(c.createdAt).toLocaleDateString([], {
                         month: 'short',
                         day: 'numeric',
@@ -404,7 +404,7 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                       <button
                         type="button"
                         onClick={() => onOpenSendToAuthority(c)}
-                        className="p-1.5 rounded-lg text-teal-700 hover:bg-teal-50 transition-colors"
+                        className="p-1.5 rounded-lg text-cyan-400 hover:text-cyan-300 hover:bg-cyan-950/60 transition-colors cursor-pointer"
                         title="Send to Authority (Demo Showcase)"
                       >
                         <Send className="w-3.5 h-3.5" />
@@ -414,7 +414,7 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                         <button
                           type="button"
                           onClick={() => onOpenRejectModal(c)}
-                          className="p-1.5 rounded-lg text-rose-600 hover:bg-rose-50 transition-colors"
+                          className="p-1.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-950/60 transition-colors cursor-pointer"
                           title="Reject Complaint"
                         >
                           <ShieldAlert className="w-3.5 h-3.5" />
@@ -424,7 +424,7 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                       <button
                         type="button"
                         onClick={() => onNavigate('complaint_detail', c.complaintId)}
-                        className="py-1 px-2.5 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white text-[11px] font-semibold transition-colors"
+                        className="py-1 px-2.5 rounded-lg bg-gradient-to-r from-[#0F766E] to-[#00D6B8] hover:from-[#115E59] hover:to-[#22D3EE] text-white text-[11px] font-semibold transition-all cursor-pointer shadow-xs"
                       >
                         View
                       </button>
@@ -438,7 +438,7 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
 
         {/* PAGINATION CONTROLS */}
         {totalPages > 1 && (
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <div className="pt-4 border-t border-cyan-500/20 flex items-center justify-between text-xs text-slate-400">
             <span>
               Page {currentPage} of {totalPages} ({sorted.length} total tickets)
             </span>
@@ -449,8 +449,8 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 className={`px-3 py-1 rounded-xl border text-xs font-semibold ${
                   currentPage === 1
-                    ? 'border-slate-200 text-slate-300 cursor-not-allowed'
-                    : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                    ? 'border-cyan-500/15 text-slate-600 cursor-not-allowed bg-[#071A2F]/40'
+                    : 'border-cyan-500/30 text-white hover:bg-[#071A2F] bg-[#071A2F]/80 cursor-pointer'
                 }`}
               >
                 Previous
@@ -461,8 +461,8 @@ export const AdminComplaintsView: React.FC<AdminComplaintsViewProps> = ({
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 className={`px-3 py-1 rounded-xl border text-xs font-semibold ${
                   currentPage === totalPages
-                    ? 'border-slate-200 text-slate-300 cursor-not-allowed'
-                    : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                    ? 'border-cyan-500/15 text-slate-600 cursor-not-allowed bg-[#071A2F]/40'
+                    : 'border-cyan-500/30 text-white hover:bg-[#071A2F] bg-[#071A2F]/80 cursor-pointer'
                 }`}
               >
                 Next
